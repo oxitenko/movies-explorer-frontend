@@ -1,0 +1,28 @@
+.navigation {
+  display: flex;
+  max-width: 308px;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.navigation__link {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #303030;
+  border-radius: 10px;
+  height: 36px;
+  width: 96px;
+  cursor: pointer;
+}
+
+.navigation__link:hover {
+  opacity: 0.6;
+  color: #ee3465;
+}

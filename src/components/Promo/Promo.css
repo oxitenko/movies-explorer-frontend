@@ -1,0 +1,25 @@
+.promo {
+  display: flex;
+  flex-direction: column;
+  width: 93%;
+  background: #272727;
+  border-radius: 10px;
+  min-height: 493px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 38px;
+}
+
+.promo__title {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  max-width: 730px;
+  margin: 160px 0 0 0;
+}
