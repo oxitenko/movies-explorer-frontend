@@ -1,0 +1,200 @@
+.student {
+  display: flex;
+  flex-direction: column;
+  width: 89%;
+  margin: 0 auto;
+  padding-bottom: 125px;
+}
+
+.student__title {
+  margin-top: 110px;
+}
+
+.student__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 66px;
+}
+
+.student__name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0 0 18px 0;
+}
+
+.student__profi {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #ffffff;
+  margin: 0 0 26px 0;
+}
+
+.student__about {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #ffffff;
+  max-width: 600px;
+  margin: 0 0 99px 0;
+}
+
+.student__gitlink {
+  text-decoration: none;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+}
+
+.student__gitlink:hover {
+  opacity: 0.6;
+}
+
+.student__foto {
+  border-radius: 10px;
+  height: 327px;
+  width: 100%;
+  max-width: 270px;
+  object-fit: cover;
+}
+
+.student__applist {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 230px;
+}
+
+.student__portfolio {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #8b8b8b;
+  margin: 101px 0 50px 0;
+}
+
+.student__appitem {
+  border-bottom: #424242 solid 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.student__appitem:last-child {
+  border-bottom: none;
+}
+
+.student__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.student__applink {
+  width: 30px;
+  height: 30px;
+}
+
+.student__applink:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 1024px) {
+  .student__title {
+    margin-top: 90px;
+  }
+  .student__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+  .student__profi {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .student__about {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0 0 87px 0;
+    max-width: 364px;
+  }
+  .student__foto {
+    height: 307px;
+    max-width: 255px;
+  }
+  .student__portfolio {
+    margin: 91px 0 50px 0;
+  }
+  .student__text {
+    font-size: 28px;
+  }
+  .student__applink {
+    width: 28px;
+    height: 28px;
+  }
+  .student {
+    padding-bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .student__title {
+    margin-top: 70px;
+  }
+  .student__container {
+    flex-direction: column-reverse;
+    margin-top: 60px;
+  }
+  .student__foto {
+    height: 352px;
+    max-width: 292px;
+  }
+  .student__name {
+    font-size: 30px;
+    line-height: 36px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .student__profi {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .student__about {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 40px;
+  }
+  .student__portfolio {
+    margin: 70px 0 40px 0;
+    font-size: 14px;
+  }
+  .student__text {
+    font-size: 18px;
+  }
+  .student__applink {
+    width: 18px;
+    height: 18px;
+  }
+  .student {
+    padding-bottom: 70px;
+  }
+}

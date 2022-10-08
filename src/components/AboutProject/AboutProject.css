@@ -16,6 +16,10 @@
   max-width: 550px;
 }
 
+.aboutproject__title {
+  margin-top: 110px;
+}
+
 .aboutproject__subtitle {
   font-family: 'Inter';
   font-style: normal;
@@ -41,6 +45,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 110px;
+  margin-bottom: 110px;
 }
 
 .aboutproject__week {
@@ -84,4 +89,68 @@
   text-align: center;
   color: #8b8b8b;
   margin: 14px 0 0 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .aboutproject__time-one {
+    width: 140px;
+  }
+  .aboutproject__time-four {
+    width: 528px;
+  }
+  .aboutproject__bar {
+    justify-content: center;
+  }
+  .aboutproject {
+    margin-top: 0px;
+  }
+  .aboutproject__title {
+    margin-top: 90px;
+  }
+  .aboutproject__subtitle {
+    margin: 0 0 24px 0;
+  }
+  .aboutproject__bar {
+    margin-top: 93px;
+    margin-bottom: 121px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .aboutproject__title {
+    margin-top: 70px;
+  }
+  .aboutproject__list {
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .aboutproject__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 16px 0;
+  }
+  .aboutproject__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .aboutproject__bar {
+    margin-top: 60px;
+    margin-bottom: 70px;
+  }
+  .aboutproject__time-one {
+    width: 100px;
+  }
+  .aboutproject__time-four {
+    width: 184px;
+  }
+  .aboutproject__time {
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .aboutproject__tech {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 10px 0 0 0;
+  }
 }

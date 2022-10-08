@@ -1,0 +1,50 @@
+.filter {
+  width: 197px;
+  display: flex;
+  justify-content: flex-end;
+  border-left: 1px solid #424242;
+  margin-left: 30px;
+}
+
+.filter__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #ffffff;
+  margin-left: 14px;
+}
+
+.filter__checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.filter__style {
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../../image/checkbox-desable.svg);
+  background-size: 36px;
+  width: 36px;
+  height: 20px;
+}
+
+.filter__checkbox:checked + .filter__style {
+  background-image: url(../../image/checkbox-check.svg);
+  background-size: 36px;
+  width: 36px;
+  height: 20px;
+  transition: background-image linear 1s;
+}
+
+.filter__checkbox:disabled + .filter__style {
+  background-image: url(../../image/checkbox-desable.svg);
+  background-size: 36px;
+  width: 36px;
+  height: 20px;
+  transition: background-image linear 1s;
+}

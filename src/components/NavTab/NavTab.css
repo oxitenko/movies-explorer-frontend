@@ -26,3 +26,15 @@
   opacity: 0.6;
   color: #ee3465;
 }
+
+@media screen and (max-width: 767px) {
+  .navigation__link {
+    height: 26px;
+    width: 82px;
+    font-size: 10px;
+  }
+  .navigation {
+    gap: 6px;
+    margin-bottom: 17px;
+  }
+}

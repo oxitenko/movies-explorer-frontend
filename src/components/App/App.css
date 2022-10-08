@@ -25,6 +25,15 @@
 .App {
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
+  max-width: 1280px;
+  min-width: 320px;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .App {
+    width: 100%;
+  }
 }

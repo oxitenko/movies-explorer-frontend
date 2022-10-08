@@ -6,17 +6,23 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Main />
       <Switch>
-        <Route path="/signup">
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route exact to="/movies">
+          <Movies />
+        </Route>
+        <Route exact path="/signup">
           <Register />
         </Route>
-        <Route path="/signin">
+        <Route exact path="/signin">
           <Login />
         </Route>
       </Switch>
