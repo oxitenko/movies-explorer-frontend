@@ -2,6 +2,7 @@ import './SearchForm.css';
 import searchicon from '../../image/search-icon.svg';
 import placeHolderIcon from '../../image/search-icon-placeholder.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import MobileSearchForm from '../MobileSearchForm/MobileSearchForm';
 
 const SearchForm = () => {
   return (
@@ -25,6 +26,7 @@ const SearchForm = () => {
         </form>
         <FilterCheckbox />
       </div>
+      <MobileSearchForm />
     </section>
   );
 };

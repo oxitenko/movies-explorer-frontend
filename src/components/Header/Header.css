@@ -7,18 +7,8 @@
   padding-top: 18px;
 }
 
-.header__container {
-  max-width: 183px;
+.header__navigation {
   display: flex;
-  row-gap: 30px;
-  justify-content: space-between;
-  align-items: center;
-  gap: 50px;
-}
-
-.header__container-movies {
-  max-width: 402px;
-  gap: 20px;
 }
 
 .header__logo {
@@ -33,39 +23,6 @@
   font-size: 12px;
   line-height: 16px;
   font-family: 'Inter';
-}
-
-.header__link-account {
-  border: 2px solid #aaaaaa;
-  border-radius: 50px;
-  width: 100px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 30px;
-}
-
-.header__link-icon {
-  width: 12px;
-  height: 14px;
-  margin-right: 7px;
-}
-
-.header__link-signin {
-  background: #3ddc84;
-  border-radius: 3px;
-  color: #000000;
-  height: 32px;
-  width: 76px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.header__link-movies {
-  font-size: 14px;
-  line-height: 18px;
 }
 
 .header__link:hover {
@@ -87,10 +44,6 @@
   .header {
     width: 91%;
   }
-  .header__container {
-    max-width: 132px;
-    gap: 14px;
-  }
   .header__link {
     font-size: 10px;
     line-height: 16px;
@@ -98,5 +51,11 @@
   .header__link-signin {
     height: 26px;
     width: 54px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__novigation-movies {
+    display: none;
   }
 }

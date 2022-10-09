@@ -1,0 +1,44 @@
+@media screen and (max-width: 768px) {
+  .mobilenav__menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 520px;
+    background-color: #202020;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 28px;
+  }
+  .header__link-account-humb {
+    margin-left: 0;
+  }
+  .header__link-humb {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .mobilenav__menu-link:first-child {
+    margin-top: 159px;
+  }
+  .mobilenav__menu-link:last-child {
+    margin-top: 88%;
+  }
+  .header__link-active {
+    border-bottom: 2px solid #ffffff;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .mobilenav__menu {
+    width: 100vw;
+    gap: 24px;
+  }
+  .mobilenav__menu-link:first-child {
+    margin-top: 144px;
+  }
+  .mobilenav__menu-link:last-child {
+    margin-top: 90%;
+  }
+}

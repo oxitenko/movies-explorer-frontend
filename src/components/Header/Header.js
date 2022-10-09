@@ -1,7 +1,9 @@
 import './Header.css';
 import pageLogo from '../../image/logo.svg';
 import { Link, useLocation } from 'react-router-dom';
-import accicon from '../../image/accicon.svg';
+import MobileHeader from '../MobileHeader/MobileHeader';
+import MainLinksList from '../MainLinksList/MainLinksList';
+import MoviesLinksList from '../MoviesLinksList/MoviesLinksList';
 
 const Header = () => {
   let location = useLocation();
@@ -11,40 +13,22 @@ const Header = () => {
       <Link to="/">
         <img className="header__logo" src={pageLogo} alt="Логотип страницы" />
       </Link>
-      <div className="header__container header__container-movies">
+      <nav
+        className={
+          location.pathname === '/'
+            ? 'header__novigation'
+            : 'header__novigation-movies'
+        }
+      >
         {location.pathname === '/' ? (
-          <>
-            <Link className="header__link" to="/signup">
-              Регистрация
-            </Link>
-            <Link className="header__link header__link-signin" to="/signin">
-              Войти
-            </Link>
-          </>
+          <MainLinksList />
         ) : location.pathname === '/movies' ? (
-          <>
-            <Link className="header__link header__link-movies" to="/movies">
-              Фильмы
-            </Link>
-            <Link
-              className="header__link header__link-movies"
-              to="/saved-movies"
-            >
-              Сохранённые фильмы
-            </Link>
-            <Link className="header__link header__link-account" to="/profile">
-              <img
-                className="header__link-icon"
-                src={accicon}
-                alt="Иконка ссылки на страницу аккаунта"
-              />
-              Аккаунт
-            </Link>
-          </>
+          <MoviesLinksList />
         ) : (
           ''
         )}
-      </div>
+      </nav>
+      <MobileHeader />
     </header>
   );
 };

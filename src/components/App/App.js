@@ -16,13 +16,13 @@ function App() {
         <Route exact path="/">
           <Main />
         </Route>
-        <Route exact to="/movies">
+        <Route path="/movies">
           <Movies />
         </Route>
-        <Route exact path="/signup">
+        <Route path="/signup">
           <Register />
         </Route>
-        <Route exact path="/signin">
+        <Route path="/signin">
           <Login />
         </Route>
       </Switch>

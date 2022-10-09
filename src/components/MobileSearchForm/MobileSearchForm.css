@@ -1,0 +1,23 @@
+.search__container-mobile {
+  display: none;
+}
+
+.search__checkbox {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .search__container-mobile {
+    display: flex;
+    margin-top: 80px;
+    margin-bottom: 46px;
+  }
+  .search__checkbox {
+    display: flex;
+    margin-bottom: 44px;
+  }
+  .search__input-mobile::placeholder {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
