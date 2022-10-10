@@ -6,7 +6,7 @@ const FilterCheckbox = () => {
 
   return (
     <div className="filter">
-      <label for="filter" className="filter__label">
+      <label className="filter__label">
         <input
           className="filter__checkbox"
           type="checkbox"

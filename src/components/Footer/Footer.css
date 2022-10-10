@@ -73,4 +73,7 @@
   .footer__link-year {
     color: #8b8b8b;
   }
+  .footer {
+    margin-top: 80px;
+  }
 }

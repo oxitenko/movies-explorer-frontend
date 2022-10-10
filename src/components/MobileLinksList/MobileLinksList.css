@@ -13,7 +13,10 @@
     gap: 28px;
   }
   .header__link-account-humb {
+    position: absolute;
     margin-left: 0;
+    bottom: 90px;
+    right: 210px;
   }
   .header__link-humb {
     font-size: 18px;
@@ -40,5 +43,9 @@
   }
   .mobilenav__menu-link:last-child {
     margin-top: 90%;
+  }
+  .header__link-account-humb {
+    bottom: 46px;
+    right: 110px;
   }
 }
