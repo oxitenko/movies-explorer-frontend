@@ -1,0 +1,13 @@
+.auth__signin {
+  flex-grow: 1;
+}
+
+.auth__button-signin {
+  margin-top: 179px;
+}
+
+@media screen and (max-width: 767px) {
+  .auth__button-signin {
+    margin-top: 267px;
+  }
+}

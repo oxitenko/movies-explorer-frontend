@@ -9,7 +9,13 @@ const Header = () => {
   let location = useLocation();
 
   return (
-    <header className="header">
+    <header
+      className={
+        location.pathname === '/signup' || '/signin' || '*' //временная заглушка, переделать под защищённый роут
+          ? 'header__auth'
+          : 'header'
+      }
+    >
       <Link to="/">
         <img className="header__logo" src={pageLogo} alt="Логотип страницы" />
       </Link>
