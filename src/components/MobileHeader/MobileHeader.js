@@ -14,11 +14,13 @@ const MobileHeader = () => {
 
   return (
     <>
-      {location.pathname === '/movies' && (
+      {(location.pathname === '/movies' || '/saved-movies' || '/profile') && (
         <nav className="mobilenav">
           {open && <MobileLinksList close={closeHumbMenu} />}
 
-          {location.pathname === '/movies' && (
+          {(location.pathname === '/movies' ||
+            '/saved-movies' ||
+            '/profile') && (
             <>
               {!open ? (
                 <img

@@ -40,39 +40,6 @@
   object-fit: cover;
 }
 
-.movies__button {
-  width: 100px;
-  height: 29px;
-  border-radius: 30px;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  align-self: center;
-}
-
-.movies__button-save {
-  background: #313131;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 11px;
-  color: #ffffff;
-}
-
-.movies__button-like {
-  background: #ee3465;
-}
-
-.movies__button-save:hover {
-  color: #ee3465;
-}
-
-.movies__button-like:hover {
-  background: transparent;
-  border: #ee3465 solid 2px;
-}
-
 @media screen and (max-width: 1024px) {
   .movies__item {
     max-width: 360px;

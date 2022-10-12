@@ -1,0 +1,64 @@
+.movies__button {
+  width: 100px;
+  height: 29px;
+  border-radius: 30px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+}
+
+.movies__button-save {
+  background: #313131;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 11px;
+  color: #ffffff;
+}
+
+.movies__button-like {
+  background: #ee3465;
+}
+
+.movies__button-save:hover {
+  color: #ee3465;
+  opacity: 0.6;
+}
+
+.movies__button-like:hover {
+  background: transparent;
+  border: #ee3465 solid 2px;
+}
+
+.movies__pagination {
+  background: #202020;
+  border-radius: 5px;
+  width: 320px;
+  height: 36px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ffffff;
+  padding: 0;
+  border: #424242 solid 1px;
+  cursor: pointer;
+}
+
+.movies__pagination-invis {
+  display: none;
+}
+
+.movies__pagination:hover {
+  background: #2d2d2d;
+}
+
+@media screen and (max-width: 767px) {
+  .movies__pagination {
+    width: 240px;
+    margin-bottom: 80px;
+  }
+}

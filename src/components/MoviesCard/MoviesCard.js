@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import './MoviesCard.css';
-import checkmark from '../../image/checkmark.svg';
 
 const MoviesCard = (props) => {
-  const [liked, setLiked] = useState(false);
-
   return (
     <li className="movies__item">
       <div className="movies__content">
@@ -16,14 +12,7 @@ const MoviesCard = (props) => {
         src={props.card.pic}
         alt={props.card.title}
       />
-      <button
-        onClick={() => setLiked(!liked)}
-        className={`movies__button ${
-          !liked ? 'movies__button-save' : 'movies__button-like'
-        }`}
-      >
-        {!liked ? 'Сохранить' : <img src={checkmark} alt="like" />}
-      </button>
+      {props.button()}
     </li>
   );
 };

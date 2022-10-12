@@ -15,26 +15,6 @@
   margin-bottom: 50px;
 }
 
-.movies__pagination {
-  background: #202020;
-  border-radius: 5px;
-  width: 320px;
-  height: 36px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  color: #ffffff;
-  padding: 0;
-  border: #424242 solid 1px;
-  cursor: pointer;
-}
-
-.movies__pagination:hover {
-  background: #2d2d2d;
-}
-
 @media screen and (max-width: 1024px) {
   .movies__list {
     grid-template-columns: repeat(2, minmax(342px, 1fr));
@@ -47,9 +27,5 @@
   .movies__list {
     grid-template-columns: repeat(1, minmax(300px, 1fr));
     column-gap: 16px;
-  }
-  .movies__pagination {
-    width: 240px;
-    margin-bottom: 80px;
   }
 }

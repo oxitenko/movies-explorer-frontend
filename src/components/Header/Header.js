@@ -20,13 +20,7 @@ const Header = () => {
             : 'header__novigation-movies'
         }
       >
-        {location.pathname === '/' ? (
-          <MainLinksList />
-        ) : location.pathname === '/movies' ? (
-          <MoviesLinksList />
-        ) : (
-          ''
-        )}
+        {location.pathname === '/' ? <MainLinksList /> : <MoviesLinksList />}
       </nav>
       <MobileHeader />
     </header>
