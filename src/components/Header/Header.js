@@ -11,9 +11,15 @@ const Header = () => {
   return (
     <header
       className={
-        location.pathname === '/signup' && '/signin' && '*' //временная заглушка, переделать под защищённый роут
-          ? 'header__auth'
-          : 'header'
+        location.pathname === '/'
+          ? 'header'
+          : location.pathname === '/movies'
+          ? 'header'
+          : location.pathname === '/saved-movies'
+          ? 'header'
+          : location.pathname === '/profile'
+          ? 'header'
+          : 'header__auth'
       }
     >
       <Link to="/">
