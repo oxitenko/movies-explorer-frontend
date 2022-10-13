@@ -10,6 +10,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
+import PopupError from '../PopupError/PopupError';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+      <PopupError />
     </div>
   );
 }
