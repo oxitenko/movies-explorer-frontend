@@ -49,7 +49,7 @@
 
 @media screen and (max-width: 767px) {
   .movies__item {
-    max-width: 300px;
+    max-width: 285px;
     height: 271px;
   }
   .movies__title {
