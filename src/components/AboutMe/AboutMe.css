@@ -91,8 +91,18 @@
 .student__appitem {
   border-bottom: #424242 solid 1px;
   display: flex;
+}
+
+.student__applink {
+  text-decoration: none;
+  display: flex;
+  width: 100%;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+}
+
+.student__applink:hover {
+  opacity: 0.6;
 }
 
 .student__appitem:last-child {
@@ -110,13 +120,9 @@
   margin: 0;
 }
 
-.student__applink {
+.student__appicon {
   width: 30px;
   height: 30px;
-}
-
-.student__applink:hover {
-  opacity: 0.6;
 }
 
 @media screen and (max-width: 1024px) {
@@ -147,7 +153,7 @@
   .student__text {
     font-size: 28px;
   }
-  .student__applink {
+  .student__appicon {
     width: 28px;
     height: 28px;
   }
@@ -190,7 +196,7 @@
   .student__text {
     font-size: 18px;
   }
-  .student__applink {
+  .student__appicon {
     width: 18px;
     height: 18px;
   }

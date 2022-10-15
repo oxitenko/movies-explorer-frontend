@@ -11,7 +11,12 @@ const AboutMe = () => {
           <h3 className="student__name">{student.name}</h3>
           <p className="student__profi">{student.profi}</p>
           <p className="student__about">{student.summary}</p>
-          <a className="student__gitlink" href="https://github.com/oxitenko">
+          <a
+            className="student__gitlink"
+            href="https://github.com/oxitenko"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Github
           </a>
         </div>
@@ -23,10 +28,15 @@ const AboutMe = () => {
           {portfolio.map((item) => {
             return (
               <li className="student__appitem" key={item.id}>
-                <p className="student__text">{item.title}</p>
-                <a href={item.link}>
+                <a
+                  className="student__applink"
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p className="student__text">{item.title}</p>
                   <img
-                    className="student__applink"
+                    className="student__appicon"
                     src={item.icon}
                     alt="Ссылка на гитхаб"
                   />

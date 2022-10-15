@@ -12,12 +12,22 @@ const Footer = () => {
         </a>
         <ul className="footer__linklist">
           <li>
-            <a className="footer__link" href="https://practicum.yandex.ru/">
+            <a
+              className="footer__link"
+              href="https://practicum.yandex.ru/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Яндекс.Практикум
             </a>
           </li>
           <li>
-            <a className="footer__link" href="https://github.com/oxitenko">
+            <a
+              className="footer__link"
+              href="https://github.com/oxitenko"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Github
             </a>
           </li>
