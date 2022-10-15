@@ -90,8 +90,12 @@
 }
 
 @media screen and (max-width: 767px) {
+  .techs {
+    background: #202020;
+  }
   .techs__title {
     margin-top: 70px;
+    border-bottom: 1px solid #000000;
   }
   .techs__subtitle {
     margin: 60px 0 24px 0;
