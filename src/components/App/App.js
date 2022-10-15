@@ -14,7 +14,7 @@ import PopupError from '../PopupError/PopupError';
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Header />
       <Switch>
         <Route exact path="/">
@@ -41,7 +41,7 @@ function App() {
       </Switch>
       <Footer />
       <PopupError />
-    </div>
+    </main>
   );
 }
 

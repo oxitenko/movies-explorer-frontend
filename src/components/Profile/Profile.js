@@ -36,9 +36,13 @@ const Profile = () => {
               name="email"
             />
           </label>
-          <button className="profile__editbtn">Редактировать</button>
+          <button type="submit" className="profile__editbtn">
+            Редактировать
+          </button>
         </form>
-        <button className="profile__logoutbtn">Выйти из аккаунта</button>
+        <button type="button" className="profile__logoutbtn">
+          Выйти из аккаунта
+        </button>
       </div>
     </section>
   );

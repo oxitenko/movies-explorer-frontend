@@ -8,6 +8,7 @@ const MoviesButton = () => {
 
   return (
     <button
+      type="button"
       onClick={() => setLiked(!liked)}
       className={`movies__button ${
         !liked ? 'movies__button-save' : 'movies__button-like'
@@ -20,18 +21,26 @@ const MoviesButton = () => {
 
 const SavedMoviesButton = () => {
   return (
-    <button className="movies__button movies__button-save">
+    <button type="button" className="movies__button movies__button-save">
       <img src={littliecrossicon} alt="like" />
     </button>
   );
 };
 
 const PaginationButtonVisible = () => {
-  return <button className="movies__pagination">Ещё</button>;
+  return (
+    <button type="button" className="movies__pagination">
+      Ещё
+    </button>
+  );
 };
 
 const PaginationButtonInvisible = () => {
-  return <button className="movies__pagination-invis">Ещё</button>;
+  return (
+    <button type="button" className="movies__pagination-invis">
+      Ещё
+    </button>
+  );
 };
 
 export {

@@ -45,7 +45,8 @@
 }
 
 .search__input:focus {
-  outline: none;
+  outline-style: groove;
+  outline-color: #e6e6e6;
 }
 
 .search__button {

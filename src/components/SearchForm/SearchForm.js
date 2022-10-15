@@ -8,7 +8,7 @@ const SearchForm = () => {
   return (
     <section className="search">
       <div className="search__container">
-        <form className="search__form">
+        <form className="search__form" required>
           <img
             className="search__icon"
             src={placeHolderIcon}

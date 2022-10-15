@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.mobilenav__humbicon:hover {
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 768px) {
   .mobilenav {
     display: flex;
