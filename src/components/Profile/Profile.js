@@ -1,6 +1,6 @@
 import './Profile.css';
 import { student } from '../../utils/appData';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useForm from '../../hooks/useForm';
 
 const Profile = () => {
@@ -23,6 +23,7 @@ const Profile = () => {
               className="profile__input"
               type="text"
               name="name"
+              required
             />
           </label>
           <span className="profile__line"></span>
@@ -34,6 +35,7 @@ const Profile = () => {
               className="profile__input"
               type="email"
               name="email"
+              required
             />
           </label>
           <button type="submit" className="profile__editbtn">

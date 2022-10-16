@@ -11,11 +11,25 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import PopupError from '../PopupError/PopupError';
+import MobileHeader from '../MobileHeader/MobileHeader';
+import { useState } from 'react';
 
 function App() {
+  const [isOpenHumbMenu, setIsOpenHumbMenu] = useState(false);
+
+  const handleOpenCloseHumbMenu = () => {
+    setIsOpenHumbMenu(!isOpenHumbMenu);
+    document.body.classList.toggle('body_lock');
+  };
+
   return (
     <main className="App">
-      <Header />
+      <Header>
+        <MobileHeader
+          open={isOpenHumbMenu}
+          openClose={handleOpenCloseHumbMenu}
+        />
+      </Header>
       <Switch>
         <Route exact path="/">
           <Main />

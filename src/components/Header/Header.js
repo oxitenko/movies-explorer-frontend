@@ -1,11 +1,10 @@
 import './Header.css';
 import pageLogo from '../../image/logo.svg';
 import { Link, useLocation } from 'react-router-dom';
-import MobileHeader from '../MobileHeader/MobileHeader';
 import MainLinksList from '../MainLinksList/MainLinksList';
 import MoviesLinksList from '../MoviesLinksList/MoviesLinksList';
 
-const Header = () => {
+const Header = (props) => {
   let location = useLocation();
 
   return (
@@ -34,7 +33,7 @@ const Header = () => {
       >
         {location.pathname === '/' ? <MainLinksList /> : <MoviesLinksList />}
       </nav>
-      <MobileHeader />
+      {props.children}
     </header>
   );
 };

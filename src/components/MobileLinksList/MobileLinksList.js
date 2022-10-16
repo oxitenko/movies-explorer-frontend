@@ -4,7 +4,13 @@ import { NavLink, Link } from 'react-router-dom';
 
 const MobileLinksList = (props) => {
   return (
-    <ul className="mobilenav__menu">
+    <ul
+      className={
+        !props.open
+          ? 'mobilenav__menu'
+          : 'mobilenav__menu mobilenav__menu-active'
+      }
+    >
       <li onClick={props.close} className="mobilenav__menu-link">
         <NavLink
           activeClassName="header__link-active"

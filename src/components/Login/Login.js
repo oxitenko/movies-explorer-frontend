@@ -17,6 +17,7 @@ const Login = () => {
               type="email"
               name="email"
               autoComplete="username"
+              required
             />
           </label>
           <label className="auth__label auth__label-signin">
@@ -26,6 +27,7 @@ const Login = () => {
               type="password"
               name="password"
               autoComplete="current-password"
+              required
             />
           </label>
           <button type="submit" className="auth__button auth__button-signin">

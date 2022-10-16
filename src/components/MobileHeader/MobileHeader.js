@@ -2,39 +2,36 @@ import './MobileHeader.css';
 import { useLocation } from 'react-router-dom';
 import humbmenu from '../../image/humbmenu.svg';
 import humbcross from '../../image/humbcross.svg';
-import { useState } from 'react';
 import MobileLinksList from '../MobileLinksList/MobileLinksList';
 
-const MobileHeader = () => {
+const MobileHeader = (props) => {
   let location = useLocation();
-
-  const [open, setOpen] = useState(false);
-
-  const closeHumbMenu = () => setOpen(false);
 
   return (
     <>
       {(location.pathname === '/movies' || '/saved-movies' || '/profile') && (
         <nav className="mobilenav">
-          {open && <MobileLinksList close={closeHumbMenu} />}
+          {props.open && (
+            <MobileLinksList open={props.open} close={props.openClose} />
+          )}
 
           {(location.pathname === '/movies' ||
             '/saved-movies' ||
             '/profile') && (
             <>
-              {!open ? (
+              {!props.open ? (
                 <img
                   className="mobilenav__humbicon"
                   src={humbmenu}
                   alt="Иконка меню"
-                  onClick={() => setOpen(!open)}
+                  onClick={props.openClose}
                 />
               ) : (
                 <img
                   className="mobilenav__humbicon"
                   src={humbcross}
                   alt="Иконка меню"
-                  onClick={() => setOpen(!open)}
+                  onClick={props.openClose}
                 />
               )}
             </>

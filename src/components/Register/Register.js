@@ -17,6 +17,7 @@ const Register = () => {
               type="text"
               name="name"
               autoComplete="username"
+              required
             />
           </label>
           <label className="auth__label auth__label-signup">
@@ -26,6 +27,7 @@ const Register = () => {
               type="email"
               name="email"
               autoComplete="username"
+              required
             />
           </label>
           <label className="auth__label auth__label-signup">
@@ -35,6 +37,7 @@ const Register = () => {
               type="password"
               name="password"
               autoComplete="new-password"
+              required
             />
           </label>
           <button type="submit" className="auth__button auth__button-signup">

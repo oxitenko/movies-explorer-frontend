@@ -4,19 +4,24 @@
     flex-direction: column;
     position: absolute;
     top: 0;
-    right: 0;
+    transform: translateX(100%);
     height: 100vh;
     width: 520px;
     background-color: #202020;
     align-items: center;
     justify-content: flex-start;
     gap: 28px;
+    transition: all 0.3s ease-in-out;
+  }
+  .mobilenav__menu-active {
+    transform: translateX(-94%);
+    transition: all 0.3s ease-in-out;
   }
   .header__link-account-humb {
     position: absolute;
     margin-left: 0;
     bottom: 90px;
-    right: 210px;
+    transform: translateX(-50%);
   }
   .header__link-humb {
     font-size: 18px;
@@ -46,6 +51,5 @@
   }
   .header__link-account-humb {
     bottom: 46px;
-    right: 110px;
   }
 }
