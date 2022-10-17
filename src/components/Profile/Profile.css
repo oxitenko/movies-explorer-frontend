@@ -41,6 +41,15 @@
   padding: 0;
 }
 
+.profile__input::placeholder {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8b8b8b;
+}
+
 .profile__input:focus {
   outline-style: groove;
   outline-color: #e6e6e6;

@@ -8,7 +8,7 @@ const SearchForm = () => {
   return (
     <section className="search">
       <div className="search__container">
-        <form className="search__form" required>
+        <form className="search__form">
           <img
             className="search__icon"
             src={placeHolderIcon}
@@ -19,6 +19,7 @@ const SearchForm = () => {
             type="text"
             placeholder="Фильм"
             name="film"
+            required
           />
           <button className="search__button" type="submit">
             <img src={searchicon} alt="Кнопка поиска" />

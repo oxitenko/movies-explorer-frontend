@@ -91,7 +91,7 @@
   margin: 14px 0 0 0;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1230px) {
   .aboutproject__time-one {
     width: 140px;
   }
@@ -100,6 +100,8 @@
   }
   .aboutproject__bar {
     justify-content: center;
+    margin-top: 93px;
+    margin-bottom: 121px;
   }
   .aboutproject {
     margin-top: 0px;
@@ -109,10 +111,6 @@
   }
   .aboutproject__subtitle {
     margin: 0 0 24px 0;
-  }
-  .aboutproject__bar {
-    margin-top: 93px;
-    margin-bottom: 121px;
   }
 }
 

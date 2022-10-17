@@ -18,7 +18,9 @@ const Register = () => {
               name="name"
               autoComplete="username"
               required
+              placeholder="Имя"
             />
+            <span className="auth__error">Error!</span>
           </label>
           <label className="auth__label auth__label-signup">
             E-mail
@@ -28,7 +30,9 @@ const Register = () => {
               name="email"
               autoComplete="username"
               required
+              placeholder="E-mail"
             />
+            <span className="auth__error">Error!</span>
           </label>
           <label className="auth__label auth__label-signup">
             Пароль
@@ -38,7 +42,9 @@ const Register = () => {
               name="password"
               autoComplete="new-password"
               required
+              placeholder="Пароль"
             />
+            <span className="auth__error">Error!</span>
           </label>
           <button type="submit" className="auth__button auth__button-signup">
             Зарегистрироваться

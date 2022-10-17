@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Login = () => {
   return (
     <section className="auth auth__signin">
-      <div className="auth__content">
+      <div className="auth__content auth__content-signin">
         <img className="auth__logo" src={pageLogo} alt="logo" />
         <h2 className="auth__title">Рады видеть!</h2>
         <form className="auth__form auth__form-signin">
@@ -18,7 +18,9 @@ const Login = () => {
               name="email"
               autoComplete="username"
               required
+              placeholder="E-mail"
             />
+            <span className="auth__error">Error!</span>
           </label>
           <label className="auth__label auth__label-signin">
             Пароль
@@ -28,7 +30,9 @@ const Login = () => {
               name="password"
               autoComplete="current-password"
               required
+              placeholder="Пароль"
             />
+            <span className="auth__error">Error!</span>
           </label>
           <button type="submit" className="auth__button auth__button-signin">
             Войти

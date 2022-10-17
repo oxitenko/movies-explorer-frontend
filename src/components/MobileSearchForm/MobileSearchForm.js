@@ -12,6 +12,7 @@ const MobileSearchForm = () => {
             type="text"
             placeholder="Фильм"
             name="film"
+            required
           />
           <button
             className="search__button search__button-mobile"

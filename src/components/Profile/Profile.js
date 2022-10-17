@@ -24,6 +24,7 @@ const Profile = () => {
               type="text"
               name="name"
               required
+              placeholder="Имя"
             />
           </label>
           <span className="profile__line"></span>
@@ -36,6 +37,7 @@ const Profile = () => {
               type="email"
               name="email"
               required
+              placeholder="E-mail"
             />
           </label>
           <button type="submit" className="profile__editbtn">

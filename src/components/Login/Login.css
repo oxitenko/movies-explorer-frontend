@@ -10,4 +10,7 @@
   .auth__button-signin {
     margin-top: 267px;
   }
+  .auth__content-signin {
+    margin-top: 56px;
+  }
 }
