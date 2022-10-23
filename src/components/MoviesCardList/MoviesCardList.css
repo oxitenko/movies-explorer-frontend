@@ -15,6 +15,15 @@
   margin-bottom: 50px;
 }
 
+.movies__notfound {
+  font-family: 'Inter';
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 400;
+  line-height: 26px;
+  margin-top: 5%;
+}
+
 @media screen and (max-width: 1180px) {
   .movies__list {
     grid-template-columns: repeat(2, minmax(342px, 1fr));
@@ -27,5 +36,9 @@
   .movies__list {
     grid-template-columns: repeat(1, minmax(285px, 1fr));
     column-gap: 16px;
+  }
+  .movies__notfound {
+    font-size: 12px;
+    line-height: 14px;
   }
 }

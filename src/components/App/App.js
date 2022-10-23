@@ -1,5 +1,6 @@
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
 
 import Header from '../Header/Header';
 import Register from '../Register/Register';
@@ -12,10 +13,60 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import PopupError from '../PopupError/PopupError';
 import MobileHeader from '../MobileHeader/MobileHeader';
-import { useState } from 'react';
+import moviesApi from '../../utils/MoviesApi';
+import moviesFilters from '../../utils/filters';
 
 function App() {
   const [isOpenHumbMenu, setIsOpenHumbMenu] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [checkedShortFilms, setCheckedShortFilms] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSearchFilms = (value) => {
+    if (movies.length === 0) {
+      setIsLoading(true);
+      moviesApi
+        .getMovies()
+        .then((res) => {
+          localStorage.setItem('initmovies', JSON.stringify(res));
+          filterMovies(value);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    }
+    filterMovies(value);
+  };
+
+  const filterMovies = useCallback(
+    (value) => {
+      const savedMovies = JSON.parse(localStorage.getItem('initmovies'));
+      if (savedMovies) {
+        const filtredMovies = moviesFilters(
+          savedMovies,
+          value,
+          checkedShortFilms,
+        );
+        setMovies(filtredMovies);
+        localStorage.setItem('filtred-movies', JSON.stringify(filtredMovies));
+        localStorage.setItem('value', value);
+      }
+    },
+    [checkedShortFilms],
+  );
+
+  const handleCheckShortFilms = () => {
+    setCheckedShortFilms(!checkedShortFilms);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('checkbox', checkedShortFilms);
+    setCheckedShortFilms(checkedShortFilms);
+  }, [checkedShortFilms]);
+
+  useEffect(() => {
+    const storageValue = localStorage.getItem('value');
+    filterMovies(storageValue);
+  }, [filterMovies, checkedShortFilms]);
 
   const handleOpenCloseHumbMenu = () => {
     setIsOpenHumbMenu(!isOpenHumbMenu);
@@ -35,7 +86,13 @@ function App() {
           <Main />
         </Route>
         <Route path="/movies">
-          <Movies />
+          <Movies
+            movies={movies}
+            onSubmit={handleSearchFilms}
+            cheked={checkedShortFilms}
+            onCheked={handleCheckShortFilms}
+            isLoading={isLoading}
+          />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies />

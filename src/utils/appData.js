@@ -40,25 +40,10 @@ const student = {
   email: 'oxitenko@mail.com',
 };
 
-const movies = [
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 1 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 2 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 3 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 4 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 5 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 6 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 7 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 8 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 9 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 10 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 11 },
-  { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 12 },
-];
-
 const savedMovies = [
   { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 1 },
   { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 2 },
   { title: 'В погоне за Бенкси', time: '27', pic: examplepic, id: 3 },
 ];
 
-export { portfolio, techs, student, movies, savedMovies };
+export { portfolio, techs, student, savedMovies };

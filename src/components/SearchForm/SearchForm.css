@@ -70,7 +70,16 @@
 
 @media screen and (max-width: 767px) {
   .search__container {
+    flex-direction: column;
+    margin-top: 80px;
+    margin-bottom: 90px;
+  }
+  .search__icon {
     display: none;
+  }
+  .search__input::placeholder {
+    font-size: 14px;
+    line-height: 20px;
   }
   .search {
     flex-direction: column;
