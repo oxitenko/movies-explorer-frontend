@@ -40,7 +40,7 @@ const SearchForm = (props) => {
             <img src={searchicon} alt="Кнопка поиска" />
           </button>
         </form>
-        <FilterCheckbox cheked={props.cheked} onCheked={props.onCheked} />
+        <FilterCheckbox checked={props.checked} onCheked={props.onCheked} />
       </div>
     </section>
   );

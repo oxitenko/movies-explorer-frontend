@@ -1,10 +1,10 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import usePagination from '../../hooks/usePagination';
+import ServerError from '../ServerError/ServerError';
 
 const MoviesCardList = (props) => {
   const { loadMore, visibleValue } = usePagination();
-  const storageMovies = JSON.parse(localStorage.getItem('storage-film'));
 
   const pagination =
     props.movies.length === 0 || props.movies.length <= visibleValue
@@ -15,7 +15,9 @@ const MoviesCardList = (props) => {
 
   return (
     <section className="movies__searchlist">
-      {props.movies.length === 0 || null ? (
+      {props.isNotSuccessRequest ? (
+        <ServerError />
+      ) : props.movies.length === 0 || null ? (
         <span className="movies__notfound">Ничего не найдено</span>
       ) : (
         <ul className="movies__list">

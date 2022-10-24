@@ -10,7 +10,7 @@ const Movies = (props) => {
       <SearchForm
         movies={props.movies}
         onSubmit={props.onSubmit}
-        cheked={props.cheked}
+        checked={props.checked}
         onCheked={props.onCheked}
       />
       {props.isLoading ? (
@@ -20,6 +20,7 @@ const Movies = (props) => {
           pagination={PaginationButtonVisible}
           button={MoviesButton}
           movies={props.movies}
+          isNotSuccessRequest={props.isNotSuccessRequest}
         />
       )}
     </section>

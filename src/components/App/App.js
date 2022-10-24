@@ -21,6 +21,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [checkedShortFilms, setCheckedShortFilms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isNotSuccessRequest, setIsNotSuccessRequest] = useState(false);
 
   const handleSearchFilms = (value) => {
     if (movies.length === 0) {
@@ -31,7 +32,10 @@ function App() {
           localStorage.setItem('initmovies', JSON.stringify(res));
           filterMovies(value);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err);
+          setIsNotSuccessRequest(true);
+        })
         .finally(() => setIsLoading(false));
     }
     filterMovies(value);
@@ -56,12 +60,13 @@ function App() {
 
   const handleCheckShortFilms = () => {
     setCheckedShortFilms(!checkedShortFilms);
+    localStorage.setItem('checkbox', !checkedShortFilms);
   };
 
   useEffect(() => {
-    localStorage.setItem('checkbox', checkedShortFilms);
-    setCheckedShortFilms(checkedShortFilms);
-  }, [checkedShortFilms]);
+    const checkbox = localStorage.getItem('checkbox');
+    setCheckedShortFilms(JSON.parse(checkbox));
+  }, []);
 
   useEffect(() => {
     const storageValue = localStorage.getItem('value');
@@ -89,9 +94,10 @@ function App() {
           <Movies
             movies={movies}
             onSubmit={handleSearchFilms}
-            cheked={checkedShortFilms}
+            checked={checkedShortFilms}
             onCheked={handleCheckShortFilms}
             isLoading={isLoading}
+            isNotSuccessRequest={isNotSuccessRequest}
           />
         </Route>
         <Route path="/saved-movies">
