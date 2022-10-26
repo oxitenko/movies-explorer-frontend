@@ -1,7 +1,6 @@
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { MoviesButton, PaginationButtonVisible } from '../Buttons/Buttons';
 import Preloader from '../Preloader/Preloader';
 
 const Movies = (props) => {
@@ -17,10 +16,10 @@ const Movies = (props) => {
         <Preloader />
       ) : (
         <MoviesCardList
-          pagination={PaginationButtonVisible}
-          button={MoviesButton}
           movies={props.movies}
           isNotSuccessRequest={props.isNotSuccessRequest}
+          handleSavedAndDeleteMovies={props.handleSavedAndDeleteMovies}
+          savedMovies={props.savedMovies}
         />
       )}
     </section>

@@ -1,6 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const usePagination = () => {
+  useEffect(() => {
+    computeInitValue();
+    loadMore();
+  }, []);
+
   const computeInitValue = () => {
     let initValue = 0;
     if (document.documentElement.clientWidth >= 1280) {

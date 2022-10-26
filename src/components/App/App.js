@@ -1,5 +1,5 @@
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 
 import Header from '../Header/Header';
@@ -15,6 +15,8 @@ import PopupError from '../PopupError/PopupError';
 import MobileHeader from '../MobileHeader/MobileHeader';
 import moviesApi from '../../utils/MoviesApi';
 import moviesFilters from '../../utils/filters';
+import mainApi from '../../utils/MainApi';
+import * as auth from '../../utils/Auth';
 
 function App() {
   const [isOpenHumbMenu, setIsOpenHumbMenu] = useState(false);
@@ -22,6 +24,12 @@ function App() {
   const [checkedShortFilms, setCheckedShortFilms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isNotSuccessRequest, setIsNotSuccessRequest] = useState(false);
+  const [likedAndSavedMovies, setLikedAndSavedMovies] = useState([]);
+  const [isAuthSuccess, setIsAuthSuccess] = useState(true);
+  const history = useHistory();
+  const location = useLocation();
+  const isSavedMoviesPage =
+    location.pathname === '/saved-movies' ? true : false;
 
   const handleSearchFilms = (value) => {
     if (movies.length === 0) {
@@ -58,6 +66,15 @@ function App() {
     [checkedShortFilms],
   );
 
+  const failterSavedMovies = (value) => {
+    const filtredMovies = moviesFilters(
+      likedAndSavedMovies,
+      value,
+      checkedShortFilms,
+    );
+    setLikedAndSavedMovies(filtredMovies);
+  };
+
   const handleCheckShortFilms = () => {
     setCheckedShortFilms(!checkedShortFilms);
     localStorage.setItem('checkbox', !checkedShortFilms);
@@ -78,6 +95,79 @@ function App() {
     document.body.classList.toggle('body_lock');
   };
 
+  const handleSavedAndDeleteMovies = (data) => {
+    const isLikedAndSaved = likedAndSavedMovies.some(
+      (m) => data.movieId === m.movieId,
+    );
+
+    if (!isLikedAndSaved) {
+      mainApi
+        .likedAndSavedMovie(data)
+        .then((res) => {
+          setLikedAndSavedMovies([res, ...likedAndSavedMovies]);
+        })
+        .catch((err) => console.log(err));
+    }
+
+    if (isLikedAndSaved) {
+      const movie = likedAndSavedMovies.find((i) => i.movieId === data.movieId);
+      mainApi
+        .deleteSavedMovie(movie)
+        .then((res) => {
+          setLikedAndSavedMovies(
+            likedAndSavedMovies.filter((m) => m._id !== movie._id && res),
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const handleRemoveSavedMovies = (data) => {
+    mainApi
+      .deleteSavedMovie(data)
+      .then((res) => {
+        setLikedAndSavedMovies(
+          likedAndSavedMovies.filter((m) => m._id !== data._id && res),
+        );
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    mainApi
+      .getSavedMovies()
+      .then((res) => {
+        setLikedAndSavedMovies(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const registerUser = (data) => {
+    return auth
+      .register(data)
+      .then(() => {
+        history.push('/movies');
+      })
+      .catch((err) => {
+        setIsAuthSuccess(false);
+        console.log(err);
+      });
+  };
+
+  const loginUser = (data) => {
+    return auth
+      .login(data)
+      .then(() => {
+        history.push('/movies');
+      })
+      .catch((err) => {
+        setIsAuthSuccess(false);
+        console.log(err);
+      });
+  };
+
   return (
     <main className="App">
       <Header>
@@ -93,24 +183,34 @@ function App() {
         <Route path="/movies">
           <Movies
             movies={movies}
+            savedMovies={likedAndSavedMovies}
             onSubmit={handleSearchFilms}
             checked={checkedShortFilms}
             onCheked={handleCheckShortFilms}
             isLoading={isLoading}
             isNotSuccessRequest={isNotSuccessRequest}
+            handleSavedAndDeleteMovies={handleSavedAndDeleteMovies}
           />
         </Route>
         <Route path="/saved-movies">
-          <SavedMovies />
+          <SavedMovies
+            savedMovies={likedAndSavedMovies}
+            isSavedMoviesPage={isSavedMoviesPage}
+            deleteSavedMovie={handleRemoveSavedMovies}
+            onSubmit={failterSavedMovies}
+          />
         </Route>
         <Route path="/profile">
           <Profile />
         </Route>
         <Route path="/signup">
-          <Register />
+          <Register
+            onRegister={registerUser}
+            isRegisterSuccess={isAuthSuccess}
+          />
         </Route>
         <Route path="/signin">
-          <Login />
+          <Login onLogin={loginUser} isLoginSuccess={isAuthSuccess} />
         </Route>
         <Route path="*">
           <NotFound />

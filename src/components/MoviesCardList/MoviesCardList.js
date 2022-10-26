@@ -23,12 +23,25 @@ const MoviesCardList = (props) => {
         <ul className="movies__list">
           {props.movies.slice(0, visibleValue).map((item) => {
             return (
-              <MoviesCard button={props.button} key={item.id} card={item} />
+              <MoviesCard
+                key={item.movieId}
+                card={item}
+                handleSavedAndDeleteMovies={props.handleSavedAndDeleteMovies}
+                savedMovies={props.savedMovies}
+                isSavedMoviesPage={props.isSavedMoviesPage}
+                deleteSavedMovie={props.deleteSavedMovie}
+              />
             );
           })}
         </ul>
       )}
-      <button onClick={loadMore} type="button" className={pagination}>
+      <button
+        onClick={loadMore}
+        type="button"
+        className={
+          props.isSavedMoviesPage ? 'movies__pagination-invis' : pagination
+        }
+      >
         Ещё
       </button>
     </section>
