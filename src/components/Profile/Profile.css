@@ -107,6 +107,28 @@
   color: #ffffff;
 }
 
+.profile__confirm {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #3ddc84;
+  margin-top: 10%;
+  text-align: center;
+}
+
+.profile__failed {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #ee3465;
+  margin-top: 10%;
+  text-align: center;
+}
+
 @media screen and (max-width: 767px) {
   .profile__content {
     width: 260px;

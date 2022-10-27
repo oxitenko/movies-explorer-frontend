@@ -8,6 +8,8 @@ const SavedMovies = (props) => {
       <SearchForm
         isSavedMoviesPage={props.isSavedMoviesPage}
         onSubmit={props.onSubmit}
+        checked={props.checked}
+        onCheked={props.onCheked}
       />
       <MoviesCardList
         movies={props.savedMovies}

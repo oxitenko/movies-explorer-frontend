@@ -15,8 +15,10 @@ const SearchForm = (props) => {
   };
 
   useEffect(() => {
-    setValues({ film: storageValue });
-  }, [storageValue, setValues]);
+    if (!props.isSavedMoviesPage) {
+      setValues({ film: storageValue });
+    }
+  }, [storageValue, setValues, props.isSavedMoviesPage]);
 
   return (
     <section className="search">

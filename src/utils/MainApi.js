@@ -57,6 +57,26 @@ class MainApi {
       headers: this._headers,
     }).then(this._confirmStatusOk);
   }
+
+  updateUserInfo(data) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+      }),
+    }).then(this._confirmStatusOk);
+  }
+
+  logout() {
+    return fetch(`${this._url}/logout`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: this._headers,
+    }).then(this._confirmStatusOk);
+  }
 }
 
 const mainApi = new MainApi('http://localhost:3001');
