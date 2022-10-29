@@ -1,11 +1,26 @@
 import './Profile.css';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/useForm';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 const Profile = (props) => {
+  const [sameDataInvalid, setSameDataInvalid] = useState(false);
   const currentUser = useContext(CurrentUserContext);
-  const { values, handleChange, setValues } = useForm({});
+  const { values, handleChange, setValues, resetForm, errors, isValid } =
+    useForm({});
+
+  useEffect(() => {
+    if (
+      values.name === currentUser.name &&
+      values.email === currentUser.email
+    ) {
+      setSameDataInvalid(false);
+    }
+  }, [currentUser, values]);
+
+  useEffect(() => {
+    setSameDataInvalid(isValid);
+  }, [isValid, values]);
 
   useEffect(() => {
     setValues({ name: currentUser.name, email: currentUser.email });
@@ -14,13 +29,14 @@ const Profile = (props) => {
   const upadateUser = (e) => {
     e.preventDefault();
     props.onSubmit(values);
+    resetForm();
   };
 
   return (
     <section className="profile">
       <div className="profile__content">
         <h1 className="profile__title">Привет, {currentUser.name}!</h1>
-        <form className="profile__form" onSubmit={upadateUser}>
+        <form className="profile__form" onSubmit={upadateUser} noValidate>
           <label className="profile__label">
             Имя
             <input
@@ -29,10 +45,13 @@ const Profile = (props) => {
               className="profile__input"
               type="text"
               name="name"
+              minLength={2}
+              maxLength={30}
               required
               placeholder="Имя"
             />
           </label>
+          <span className="propfile__error">{errors.name}</span>
           <span className="profile__line"></span>
           <label className="profile__label">
             E-mail
@@ -46,6 +65,7 @@ const Profile = (props) => {
               placeholder="E-mail"
             />
           </label>
+          <span className="propfile__error">{errors.email}</span>
           {props.isUserDataUpdateSuccess ? (
             <span className="profile__confirm">Данные успешно изменены</span>
           ) : (
@@ -58,7 +78,11 @@ const Profile = (props) => {
           ) : (
             ''
           )}
-          <button type="submit" className="profile__editbtn">
+          <button
+            type="submit"
+            className="profile__editbtn"
+            disabled={!sameDataInvalid}
+          >
             Редактировать
           </button>
         </form>

@@ -7,11 +7,12 @@ const MoviesCardList = (props) => {
   const { loadMore, visibleValue } = usePagination();
 
   const pagination =
-    props.movies.length === 0 || props.movies.length <= visibleValue
+  props.movies !== null ?  
+  props.movies.length === 0 || props.movies.length <= visibleValue
       ? 'movies__pagination-invis'
       : props.movies.length >= 3
       ? 'movies__pagination'
-      : 'movies__pagination-invis';
+      : 'movies__pagination-invis' : ''
 
   return (
     <section className="movies__searchlist">

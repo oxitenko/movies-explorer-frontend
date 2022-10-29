@@ -3,13 +3,15 @@ import '../../style/AuthForm.css';
 import pageLogo from '../../image/logo.svg';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
+import { useEffect } from 'react';
 
 const Register = (props) => {
-  const { values, handleChange } = useForm({});
+  const { values, handleChange, errors, isValid, resetForm } = useForm({});
 
   const submitRegisterform = (e) => {
     e.preventDefault();
     props.onRegister(values);
+    resetForm();
   };
 
   return (
@@ -20,6 +22,7 @@ const Register = (props) => {
         <form
           className="auth__form auth__form-signup"
           onSubmit={submitRegisterform}
+          noValidate
         >
           <label className="auth__label auth__label-signup">
             Имя
@@ -30,10 +33,14 @@ const Register = (props) => {
               type="text"
               name="name"
               autoComplete="username"
+              minLength={2}
+              maxLength={30}
               required
               placeholder="Имя"
             />
-            <span className="auth__error">Error!</span>
+            <span aria-live="polite" className="auth__error">
+              {errors.name}
+            </span>
           </label>
           <label className="auth__label auth__label-signup">
             E-mail
@@ -47,7 +54,9 @@ const Register = (props) => {
               required
               placeholder="E-mail"
             />
-            <span className="auth__error">Error!</span>
+            <span aria-live="polite" className="auth__error">
+              {errors.email}
+            </span>
           </label>
           <label className="auth__label auth__label-signup">
             Пароль
@@ -58,10 +67,14 @@ const Register = (props) => {
               value={values.password}
               onChange={handleChange}
               autoComplete="new-password"
+              minLength={6}
+              maxLength={24}
               required
               placeholder="Пароль"
             />
-            <span className="auth__error">Error!</span>
+            <span aria-live="polite" className="auth__error">
+              {errors.password}
+            </span>
           </label>
           {!props.isRegisterSuccess ? (
             <span className="auth__error">
@@ -70,7 +83,11 @@ const Register = (props) => {
           ) : (
             ''
           )}
-          <button type="submit" className="auth__button auth__button-signup">
+          <button
+            type="submit"
+            disabled={!isValid}
+            className="auth__button auth__button-signup"
+          >
             Зарегистрироваться
           </button>
         </form>

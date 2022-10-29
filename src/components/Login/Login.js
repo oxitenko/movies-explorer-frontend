@@ -3,13 +3,15 @@ import '../../style/AuthForm.css';
 import pageLogo from '../../image/logo.svg';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
+import { useEffect } from 'react';
 
 const Login = (props) => {
-  const { values, handleChange } = useForm({});
+  const { values, handleChange, errors, isValid, resetForm } = useForm({});
 
   const submitLoginForm = (e) => {
     e.preventDefault();
     props.onLogin(values);
+    resetForm();
   };
 
   return (
@@ -20,6 +22,7 @@ const Login = (props) => {
         <form
           className="auth__form auth__form-signin"
           onSubmit={submitLoginForm}
+          noValidate
         >
           <label className="auth__label auth__label-signin">
             E-mail
@@ -33,7 +36,9 @@ const Login = (props) => {
               required
               placeholder="E-mail"
             />
-            <span className="auth__error">Error!</span>
+            <span aria-live="polite" className="auth__error">
+              {errors.email}
+            </span>
           </label>
           <label className="auth__label auth__label-signin">
             Пароль
@@ -44,10 +49,14 @@ const Login = (props) => {
               value={values.props}
               onChange={handleChange}
               autoComplete="current-password"
+              minLength={6}
+              maxLength={24}
               required
               placeholder="Пароль"
             />
-            <span className="auth__error">Error!</span>
+            <span aria-live="polite" className="auth__error">
+              {errors.password}
+            </span>
           </label>
           {!props.isLoginSuccess ? (
             <span className="auth__error">
@@ -56,7 +65,11 @@ const Login = (props) => {
           ) : (
             ''
           )}
-          <button type="submit" className="auth__button auth__button-signin">
+          <button
+            type="submit"
+            className="auth__button auth__button-signin"
+            disabled={!isValid}
+          >
             Войти
           </button>
         </form>

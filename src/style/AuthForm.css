@@ -99,6 +99,14 @@
   cursor: pointer;
 }
 
+.auth__button:disabled {
+  background: #b1cdfa;
+}
+
+.auth__button:disabled:hover {
+  background: #b1cdfa;
+}
+
 .auth__button:hover {
   background-color: #4294f4;
 }

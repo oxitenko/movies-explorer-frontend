@@ -1,5 +1,11 @@
 import './App.css';
-import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  useHistory,
+  useLocation,
+  Redirect,
+} from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
 
 import Header from '../Header/Header';
@@ -18,6 +24,7 @@ import moviesFilters from '../../utils/filters';
 import mainApi from '../../utils/MainApi';
 import * as auth from '../../utils/Auth';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [isOpenHumbMenu, setIsOpenHumbMenu] = useState(false);
@@ -163,13 +170,15 @@ function App() {
   }, [isLogin]);
 
   useEffect(() => {
-    if (!isLogin) {
-      mainApi
-        .getUserInfo()
-        .then((res) => setCurrentUser(res))
-        .catch((err) => console.log(err));
-    }
-  }, [isLogin]);
+    mainApi
+      .getUserInfo()
+      .then((res) => {
+        setIsLogin(true);
+        setCurrentUser(res);
+        history.push('/movies');
+      })
+      .catch((err) => console.log(err));
+  }, [isLogin, history]);
 
   const loginUser = (data) => {
     return auth
@@ -189,9 +198,8 @@ function App() {
       .register(data)
       .then((res) => {
         setCurrentUser(res);
-        setIsLogin(true);
-        history.push('/movies');
         loginUser(data);
+        history.push('/movies');
       })
       .catch((err) => {
         setIsAuthSuccess(false);
@@ -231,46 +239,57 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <main className="App">
-        <Header>
+        <Header isLogin={isLogin}>
           <MobileHeader
             open={isOpenHumbMenu}
             openClose={handleOpenCloseHumbMenu}
+            isLogin={isLogin}
           />
         </Header>
         <Switch>
           <Route exact path="/">
             <Main />
           </Route>
-          <Route path="/movies">
-            <Movies
-              movies={movies}
-              savedMovies={likedAndSavedMovies}
-              onSubmit={handleSearchFilms}
-              checked={checkedShortFilms}
-              onCheked={handleCheckShortFilms}
-              isLoading={isLoading}
-              isNotSuccessRequest={isNotSuccessRequest}
-              handleSavedAndDeleteMovies={handleSavedAndDeleteMovies}
-            />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies
-              savedMovies={likedAndSavedMovies}
-              isSavedMoviesPage={isSavedMoviesPage}
-              deleteSavedMovie={handleRemoveSavedMovies}
-              onSubmit={filterSavedMovies}
-              checked={checkedShortFilms}
-              onCheked={handleCheckShortFilms}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile
-              onSubmit={handleUpdateUserData}
-              isUserDataUpdateSuccess={isUserDataUpdateSuccess}
-              isUserDataUpdateFailed={isUserDataUpdateFailed}
-              onLogout={handleLogout}
-            />
-          </Route>
+
+          <ProtectedRoute
+            exact
+            path="/movies"
+            isLogin={isLogin}
+            component={Movies}
+            movies={movies}
+            savedMovies={likedAndSavedMovies}
+            onSubmit={handleSearchFilms}
+            checked={checkedShortFilms}
+            onCheked={handleCheckShortFilms}
+            isLoading={isLoading}
+            isNotSuccessRequest={isNotSuccessRequest}
+            handleSavedAndDeleteMovies={handleSavedAndDeleteMovies}
+          />
+
+          <ProtectedRoute
+            exact
+            path="/saved-movies"
+            isLogin={isLogin}
+            component={SavedMovies}
+            savedMovies={likedAndSavedMovies}
+            isSavedMoviesPage={isSavedMoviesPage}
+            deleteSavedMovie={handleRemoveSavedMovies}
+            onSubmit={filterSavedMovies}
+            checked={checkedShortFilms}
+            onCheked={handleCheckShortFilms}
+          />
+
+          <ProtectedRoute
+            exact
+            path="/profile"
+            isLogin={isLogin}
+            component={Profile}
+            onSubmit={handleUpdateUserData}
+            isUserDataUpdateSuccess={isUserDataUpdateSuccess}
+            isUserDataUpdateFailed={isUserDataUpdateFailed}
+            onLogout={handleLogout}
+          />
+
           <Route path="/signup">
             <Register
               onRegister={registerUser}
@@ -282,6 +301,9 @@ function App() {
           </Route>
           <Route path="*">
             <NotFound />
+          </Route>
+          <Route>
+            {isLogin ? <Redirect to="/" /> : <Redirect to="/movies" />}
           </Route>
         </Switch>
         <Footer />

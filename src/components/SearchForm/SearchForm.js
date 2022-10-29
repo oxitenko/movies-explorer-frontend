@@ -6,12 +6,16 @@ import useForm from '../../hooks/useForm';
 import { useEffect } from 'react';
 
 const SearchForm = (props) => {
-  const { values, handleChange, setValues } = useForm({});
+  const { values, handleChange, setValues, resetForm } = useForm({});
   const storageValue = localStorage.getItem('value');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!values.film) {
+      return;
+    }
     props.onSubmit(values.film);
+    resetForm();
   };
 
   useEffect(() => {
