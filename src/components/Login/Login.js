@@ -3,7 +3,6 @@ import '../../style/AuthForm.css';
 import pageLogo from '../../image/logo.svg';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import { useEffect } from 'react';
 
 const Login = (props) => {
   const { values, handleChange, errors, isValid, resetForm } = useForm({});
@@ -30,7 +29,7 @@ const Login = (props) => {
               className="auth__input auth__input-signin"
               type="email"
               name="email"
-              value={values.email}
+              value={values.email || ''}
               onChange={handleChange}
               autoComplete="username"
               required
@@ -46,7 +45,7 @@ const Login = (props) => {
               className="auth__input auth__input-signin"
               type="password"
               name="password"
-              value={values.props}
+              value={values.password || ''}
               onChange={handleChange}
               autoComplete="current-password"
               minLength={6}

@@ -41,7 +41,7 @@ const Profile = (props) => {
             Имя
             <input
               onChange={handleChange}
-              value={values.name}
+              value={values.name || ''}
               className="profile__input"
               type="text"
               name="name"
@@ -57,7 +57,7 @@ const Profile = (props) => {
             E-mail
             <input
               onChange={handleChange}
-              value={values.email}
+              value={values.email || ''}
               className="profile__input"
               type="email"
               name="email"

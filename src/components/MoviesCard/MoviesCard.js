@@ -3,9 +3,9 @@ import LikeButton from '../LikeButton.js/LikeButton';
 import RemoveSavedMoviesButton from '../RemoveSavedMoviesButton/RemoveSavedMoviesButton';
 
 const MoviesCard = (props) => {
-  const isLikedAndSaved = props.savedMovies.some(
-    (m) => m.movieId === props.card.id,
-  );
+  const isLikedAndSaved = props.savedMovies
+    ? props.savedMovies.some((m) => m.movieId === props.card.id)
+    : false;
 
   const likeAndSaved = () => {
     props.handleSavedAndDeleteMovies({

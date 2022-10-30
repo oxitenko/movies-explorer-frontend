@@ -38,7 +38,7 @@ const SearchForm = (props) => {
             type="text"
             placeholder="Фильм"
             name="film"
-            value={values.film}
+            value={values.film || ''}
             onChange={handleChange}
             required
           />

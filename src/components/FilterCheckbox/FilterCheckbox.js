@@ -9,6 +9,7 @@ const FilterCheckbox = (props) => {
           type="checkbox"
           name="filter"
           id="filter"
+          value={props.checked || false}
           onChange={props.onCheked}
           checked={props.checked}
         />

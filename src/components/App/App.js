@@ -33,11 +33,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isNotSuccessRequest, setIsNotSuccessRequest] = useState(false);
   const [likedAndSavedMovies, setLikedAndSavedMovies] = useState([]);
+  const [savedMoviesForRender, setSavedMoviesForRender] = useState([]);
   const [isAuthSuccess, setIsAuthSuccess] = useState(true);
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
   const [isUserDataUpdateSuccess, setIsUserDataUpdateSuccess] = useState(false);
   const [isUserDataUpdateFailed, setIsUserDataUpdateFailed] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [isPopupErrorOpen, setIsPopupErrorOpen] = useState(false);
   const history = useHistory();
   const location = useLocation();
   const isSavedMoviesPage =
@@ -88,13 +90,13 @@ function App() {
   };
 
   const filterSavedShort = useCallback(() => {
-    const savedMovies = JSON.parse(localStorage.getItem('saved-movies'));
     if (checkedShortFilms) {
-      setLikedAndSavedMovies(savedMovies.filter((m) => m.duration <= 40));
+      const filter = likedAndSavedMovies.filter((m) => m.duration <= 40);
+      setSavedMoviesForRender(filter);
     } else {
-      setLikedAndSavedMovies(savedMovies);
+      setSavedMoviesForRender(likedAndSavedMovies);
     }
-  }, [checkedShortFilms]);
+  }, [checkedShortFilms, likedAndSavedMovies]);
 
   const handleCheckShortFilms = () => {
     setCheckedShortFilms(!checkedShortFilms);
@@ -128,7 +130,10 @@ function App() {
         .then((res) => {
           setLikedAndSavedMovies([res, ...likedAndSavedMovies]);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsPopupErrorOpen(true);
+          console.log(err);
+        });
     }
 
     if (isLikedAndSaved) {
@@ -140,7 +145,10 @@ function App() {
             likedAndSavedMovies.filter((m) => m._id !== movie._id && res),
           );
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsPopupErrorOpen(true);
+          console.log(err);
+        });
     }
   };
 
@@ -152,16 +160,18 @@ function App() {
           likedAndSavedMovies.filter((m) => m._id !== data._id && res),
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsPopupErrorOpen(true);
+        console.log(err);
+      });
   };
 
   useEffect(() => {
-    if (!isLogin) {
+    if (isLogin) {
       mainApi
         .getSavedMovies()
         .then((res) => {
           setLikedAndSavedMovies(res);
-          localStorage.setItem('saved-movies', JSON.stringify(res));
         })
         .catch((err) => {
           console.log(err);
@@ -225,15 +235,23 @@ function App() {
       .logout()
       .then(() => {
         setIsLogin(false);
+        setMovies([]);
         history.push('/');
         localStorage.clear();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsPopupErrorOpen(true);
+        console.log(err);
+      });
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'smooth',
     });
+  };
+
+  const closeAllPopup = () => {
+    setIsPopupErrorOpen(false);
   };
 
   return (
@@ -271,7 +289,7 @@ function App() {
             path="/saved-movies"
             isLogin={isLogin}
             component={SavedMovies}
-            savedMovies={likedAndSavedMovies}
+            savedMovies={savedMoviesForRender}
             isSavedMoviesPage={isSavedMoviesPage}
             deleteSavedMovie={handleRemoveSavedMovies}
             onSubmit={filterSavedMovies}
@@ -307,7 +325,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-        <PopupError />
+        <PopupError isOpen={isPopupErrorOpen} onClose={closeAllPopup} />
       </main>
     </CurrentUserContext.Provider>
   );

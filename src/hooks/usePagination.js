@@ -1,39 +1,35 @@
 import { useEffect, useState } from 'react';
+import useResize from './useResize';
 
 const usePagination = () => {
-  useEffect(() => {
-    computeInitValue();
-    loadMore();
-  }, []);
+  const windowSize = useResize();
+  const [initValue, setInitValue] = useState(0);
+  const [loadmoreNumber, setLoadMoreNumber] = useState(0);
 
   const computeInitValue = () => {
-    let initValue = 0;
-    if (document.documentElement.clientWidth >= 1280) {
-      initValue = 12;
-    } else if (document.documentElement.clientWidth >= 768) {
-      initValue = 8;
-    } else if (document.documentElement.clientWidth >= 320) {
-      initValue = 5;
+    if (windowSize.size >= 1280) {
+      setInitValue(12);
+      setLoadMoreNumber(3);
+    } else if (windowSize.size < 1280 && windowSize.size >= 768) {
+      setInitValue(8);
+      setLoadMoreNumber(2);
+    } else if (windowSize.size < 768 && windowSize.size >= 320) {
+      setInitValue(5);
+      setLoadMoreNumber(2);
     }
-    return initValue;
   };
 
-  const [visibleValue, setVesibleValue] = useState(computeInitValue);
+  useEffect(() => {
+    computeInitValue();
+  }, [windowSize.size]);
 
-  const loadMore = (count) => {
-    if (document.documentElement.clientWidth >= 1280) {
-      count = 3;
-    } else if (document.documentElement.clientWidth >= 768) {
-      count = 2;
-    } else if (document.documentElement.clientWidth >= 320) {
-      count = 5;
-    }
-    setVesibleValue((prevValue) => prevValue + count);
+  const loadMore = () => {
+    setInitValue((state) => state + loadmoreNumber);
   };
 
   return {
+    initValue,
     loadMore,
-    visibleValue,
   };
 };
 
