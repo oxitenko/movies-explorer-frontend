@@ -25,7 +25,7 @@ const useResize = () => {
     window.addEventListener('resize', changeSize);
 
     return () => window.removeEventListener('resize', changeSize);
-  }, [windowSize.size]);
+  }, []);
 
   return windowSize;
 };

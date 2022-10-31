@@ -2,9 +2,16 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import usePagination from '../../hooks/usePagination';
 import ServerError from '../ServerError/ServerError';
+import { useEffect } from 'react';
+import useResize from '../../hooks/useResize';
 
 const MoviesCardList = (props) => {
-  const { loadMore, initValue } = usePagination();
+  const { loadMore, initValue, computeInitValue } = usePagination();
+  const windowSize = useResize();
+
+  useEffect(() => {
+    computeInitValue();
+  }, [windowSize.size]);
 
   const pagination =
     props.movies !== null

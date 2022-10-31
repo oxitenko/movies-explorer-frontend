@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useResize from './useResize';
 
 const usePagination = () => {
@@ -19,10 +19,6 @@ const usePagination = () => {
     }
   };
 
-  useEffect(() => {
-    computeInitValue();
-  }, [windowSize.size]);
-
   const loadMore = () => {
     setInitValue((state) => state + loadmoreNumber);
   };
@@ -30,6 +26,7 @@ const usePagination = () => {
   return {
     initValue,
     loadMore,
+    computeInitValue,
   };
 };
 

@@ -29,7 +29,9 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 function App() {
   const [isOpenHumbMenu, setIsOpenHumbMenu] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [checkedShortFilms, setCheckedShortFilms] = useState(false);
+  const [checkedShortFilmsMovies, setCheckedShortFilmsMovies] = useState(false);
+  const [checkedShortFilmsSavedMovies, setCheckedShortFilmsSavedMovies] =
+    useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isNotSuccessRequest, setIsNotSuccessRequest] = useState(false);
   const [likedAndSavedMovies, setLikedAndSavedMovies] = useState([]);
@@ -70,49 +72,65 @@ function App() {
         const filtredMovies = moviesFilters(
           savedMovies,
           value,
-          checkedShortFilms,
+          checkedShortFilmsMovies,
         );
         setMovies(filtredMovies);
         localStorage.setItem('filtred-movies', JSON.stringify(filtredMovies));
         localStorage.setItem('value', value);
       }
     },
-    [checkedShortFilms],
+    [checkedShortFilmsMovies],
   );
 
   const filterSavedMovies = (value) => {
     const filtredMovies = moviesFilters(
       likedAndSavedMovies,
       value,
-      checkedShortFilms,
+      checkedShortFilmsMovies,
     );
-    setLikedAndSavedMovies(filtredMovies);
+    setSavedMoviesForRender(filtredMovies);
   };
 
+  useEffect(() => {
+    if (!isSavedMoviesPage) {
+      setSavedMoviesForRender(likedAndSavedMovies);
+    }
+  }, [isSavedMoviesPage, likedAndSavedMovies]);
+
   const filterSavedShort = useCallback(() => {
-    if (checkedShortFilms) {
+    if (checkedShortFilmsSavedMovies) {
       const filter = likedAndSavedMovies.filter((m) => m.duration <= 40);
       setSavedMoviesForRender(filter);
     } else {
       setSavedMoviesForRender(likedAndSavedMovies);
     }
-  }, [checkedShortFilms, likedAndSavedMovies]);
+  }, [checkedShortFilmsSavedMovies, likedAndSavedMovies]);
 
   const handleCheckShortFilms = () => {
-    setCheckedShortFilms(!checkedShortFilms);
-    localStorage.setItem('checkbox', !checkedShortFilms);
+    setCheckedShortFilmsMovies(!checkedShortFilmsMovies);
+    localStorage.setItem('checkbox', !checkedShortFilmsMovies);
+  };
+
+  const handleCheckShortFilmsSavedMovies = () => {
+    setCheckedShortFilmsSavedMovies(!checkedShortFilmsSavedMovies);
+    localStorage.setItem('checkbox-short', !checkedShortFilmsSavedMovies);
   };
 
   useEffect(() => {
     const checkbox = localStorage.getItem('checkbox');
-    setCheckedShortFilms(JSON.parse(checkbox));
+    const checkboxShort = localStorage.getItem('checkbox-short');
+    setCheckedShortFilmsMovies(JSON.parse(checkbox));
+    setCheckedShortFilmsSavedMovies(JSON.parse(checkboxShort));
   }, []);
 
   useEffect(() => {
     const storageValue = localStorage.getItem('value');
     filterMovies(storageValue);
+  }, [filterMovies, checkedShortFilmsMovies]);
+
+  useEffect(() => {
     filterSavedShort();
-  }, [filterMovies, filterSavedShort, checkedShortFilms]);
+  }, [filterSavedShort, checkedShortFilmsSavedMovies]);
 
   const handleOpenCloseHumbMenu = () => {
     setIsOpenHumbMenu(!isOpenHumbMenu);
@@ -185,16 +203,16 @@ function App() {
       .then((res) => {
         setIsLogin(true);
         setCurrentUser(res);
-        history.push('/movies');
       })
       .catch((err) => console.log(err));
-  }, [isLogin, history]);
+  }, []);
 
   const loginUser = (data) => {
     return auth
       .login(data)
-      .then(() => {
+      .then((res) => {
         setIsLogin(true);
+        setCurrentUser(res);
         history.push('/movies');
       })
       .catch((err) => {
@@ -206,9 +224,11 @@ function App() {
   const registerUser = (data) => {
     return auth
       .register(data)
-      .then((res) => {
-        setCurrentUser(res);
-        loginUser(data);
+      .then(() => {
+        loginUser({
+          email: data.email,
+          password: data.password,
+        });
         history.push('/movies');
       })
       .catch((err) => {
@@ -277,7 +297,7 @@ function App() {
             movies={movies}
             savedMovies={likedAndSavedMovies}
             onSubmit={handleSearchFilms}
-            checked={checkedShortFilms}
+            checked={checkedShortFilmsMovies}
             onCheked={handleCheckShortFilms}
             isLoading={isLoading}
             isNotSuccessRequest={isNotSuccessRequest}
@@ -293,8 +313,8 @@ function App() {
             isSavedMoviesPage={isSavedMoviesPage}
             deleteSavedMovie={handleRemoveSavedMovies}
             onSubmit={filterSavedMovies}
-            checked={checkedShortFilms}
-            onCheked={handleCheckShortFilms}
+            checked={checkedShortFilmsSavedMovies}
+            onCheked={handleCheckShortFilmsSavedMovies}
           />
 
           <ProtectedRoute

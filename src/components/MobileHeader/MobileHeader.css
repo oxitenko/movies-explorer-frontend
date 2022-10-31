@@ -9,6 +9,7 @@
   right: 3.91%;
   top: 15px;
   cursor: pointer;
+  z-index: 2;
 }
 
 .mobilenav__humbicon:hover {
