@@ -9,4 +9,4 @@
 
 # 
 
-Ссылка на pull request: https://github.com/oxitenko/movies-explorer-frontend/tree/level-3
+Ссылка на pull request: https://github.com/oxitenko/movies-explorer-frontend/pull/2
