@@ -1,0 +1,117 @@
+.techs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #272727;
+}
+
+.techs__title {
+  width: 89%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.techs__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.techs__subtitle {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 90px 0 25px 0;
+}
+
+.techs__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0 0 100px 0;
+  max-width: 400px;
+}
+
+.techs__skillslist {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.techs__skill {
+  background: #303030;
+  border-radius: 10px;
+  width: 90px;
+  height: 60px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .techs__title {
+    margin-top: 90px;
+  }
+  .techs__subtitle {
+    margin: 80px 0 22px 0;
+  }
+  .techs__text {
+    margin: 0 0 83px 0;
+  }
+  .techs__skill {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .techs__skillslist {
+    margin-bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .techs {
+    background: #202020;
+  }
+  .techs__title {
+    margin-top: 70px;
+    border-bottom: 1px solid #000000;
+  }
+  .techs__subtitle {
+    margin: 60px 0 24px 0;
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .techs__text {
+    margin: 0 0 50px 0;
+    font-size: 11px;
+    line-height: 16px;
+    max-width: 292px;
+  }
+  .techs__skillslist {
+    flex-wrap: wrap;
+    max-width: 178px;
+    justify-content: flex-start;
+    margin-bottom: 70px;
+  }
+}

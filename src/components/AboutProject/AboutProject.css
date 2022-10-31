@@ -1,0 +1,154 @@
+.aboutproject {
+  display: flex;
+  flex-direction: column;
+  width: 89%;
+  margin: 0 auto;
+  margin-top: 110px;
+}
+
+.aboutproject__list {
+  display: flex;
+  gap: 40px;
+  margin-top: 70px;
+}
+
+.aboutproject__item {
+  max-width: 550px;
+}
+
+.aboutproject__title {
+  margin-top: 110px;
+}
+
+.aboutproject__subtitle {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0 0 26px 0;
+}
+
+.aboutproject__text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.aboutproject__bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 110px;
+  margin-bottom: 110px;
+}
+
+.aboutproject__week {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.aboutproject__time {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.aboutproject__time-one {
+  color: #000;
+  background: #3ddc84;
+  width: 228px;
+}
+
+.aboutproject__time-four {
+  color: #ffffff;
+  background: #303030;
+  width: 912px;
+}
+
+.aboutproject__tech {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8b8b8b;
+  margin: 14px 0 0 0;
+}
+
+@media screen and (max-width: 1230px) {
+  .aboutproject__time-one {
+    width: 140px;
+  }
+  .aboutproject__time-four {
+    width: 528px;
+  }
+  .aboutproject__bar {
+    justify-content: center;
+    margin-top: 93px;
+    margin-bottom: 121px;
+  }
+  .aboutproject {
+    margin-top: 0px;
+  }
+  .aboutproject__title {
+    margin-top: 90px;
+  }
+  .aboutproject__subtitle {
+    margin: 0 0 24px 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .aboutproject__title {
+    margin-top: 70px;
+  }
+  .aboutproject__list {
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .aboutproject__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 16px 0;
+  }
+  .aboutproject__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .aboutproject__bar {
+    margin-top: 60px;
+    margin-bottom: 70px;
+  }
+  .aboutproject__time-one {
+    width: 100px;
+  }
+  .aboutproject__time-four {
+    width: 184px;
+  }
+  .aboutproject__time {
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .aboutproject__tech {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 10px 0 0 0;
+  }
+}

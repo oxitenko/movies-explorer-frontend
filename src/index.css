@@ -1,0 +1,21 @@
+body {
+  background-color: #202020;
+  min-height: 100vh;
+  overflow: visible;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.body_lock {
+  overflow: hidden;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
