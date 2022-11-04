@@ -79,6 +79,6 @@ class MainApi {
   }
 }
 
-const mainApi = new MainApi('https://api.movies-explorer-app.nomoredomains.icu');
+const mainApi = new MainApi('http://localhost:3001');
 
 export default mainApi;

@@ -4,6 +4,7 @@ import usePagination from '../../hooks/usePagination';
 import ServerError from '../ServerError/ServerError';
 import { useEffect } from 'react';
 import useResize from '../../hooks/useResize';
+import { LOADMORE_NUMBER } from '../../utils/constants';
 
 const MoviesCardList = (props) => {
   const { loadMore, initValue, computeInitValue } = usePagination();
@@ -11,13 +12,13 @@ const MoviesCardList = (props) => {
 
   useEffect(() => {
     computeInitValue();
-  }, [windowSize.size]);
+  }, [windowSize.width]);
 
   const pagination =
     props.movies !== null
       ? props.movies.length === 0 || props.movies.length <= initValue
         ? 'movies__pagination-invis'
-        : props.movies.length >= 3
+        : props.movies.length >= LOADMORE_NUMBER
         ? 'movies__pagination'
         : 'movies__pagination-invis'
       : '';
@@ -26,7 +27,7 @@ const MoviesCardList = (props) => {
     <section className="movies__searchlist">
       {props.isNotSuccessRequest ? (
         <ServerError />
-      ) : props.movies.length === 0 || null ? (
+      ) : props.isMoviesFound ? (
         <span className="movies__notfound">Ничего не найдено</span>
       ) : (
         <ul className="movies__list">

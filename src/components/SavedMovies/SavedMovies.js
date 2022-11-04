@@ -16,6 +16,7 @@ const SavedMovies = (props) => {
         savedMovies={props.savedMovies}
         isSavedMoviesPage={props.isSavedMoviesPage}
         deleteSavedMovie={props.deleteSavedMovie}
+        isMoviesFound={props.isMoviesFound}
       />
     </section>
   );

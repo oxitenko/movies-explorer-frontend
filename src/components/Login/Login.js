@@ -3,20 +3,32 @@ import '../../style/AuthForm.css';
 import pageLogo from '../../image/logo.svg';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
+import { useEffect } from 'react';
 
 const Login = (props) => {
   const { values, handleChange, errors, isValid, resetForm } = useForm({});
 
+  useEffect(() => {
+    props.updateAuthError();
+  }, []);
+
+  useEffect(() => {
+    if (props.isLoginSuccess) {
+      resetForm();
+    }
+  }, [props.isLoginSuccess, resetForm]);
+
   const submitLoginForm = (e) => {
     e.preventDefault();
     props.onLogin(values);
-    resetForm();
   };
 
   return (
     <section className="auth auth__signin">
       <div className="auth__content auth__content-signin">
-        <img className="auth__logo" src={pageLogo} alt="logo" />
+        <Link to="/">
+          <img className="auth__logo" src={pageLogo} alt="logo" />
+        </Link>
         <h2 className="auth__title">Рады видеть!</h2>
         <form
           className="auth__form auth__form-signin"
@@ -32,6 +44,7 @@ const Login = (props) => {
               value={values.email || ''}
               onChange={handleChange}
               autoComplete="username"
+              pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
               required
               placeholder="E-mail"
             />
@@ -59,7 +72,7 @@ const Login = (props) => {
           </label>
           {!props.isLoginSuccess ? (
             <span className="auth__error">
-              Произошла ошибка, попробуйту снова
+              Произошла ошибка, попробуйте снова
             </span>
           ) : (
             ''

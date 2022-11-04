@@ -1,4 +1,4 @@
-const BACKEND = 'https://api.movies-explorer-app.nomoredomains.icu';
+const BACKEND = 'http://localhost:3001';
 
 const checkResponse = (response) => {
   return response.ok

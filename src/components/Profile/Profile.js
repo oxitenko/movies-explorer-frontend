@@ -4,23 +4,22 @@ import useForm from '../../hooks/useForm';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 const Profile = (props) => {
-  const [sameDataInvalid, setSameDataInvalid] = useState(false);
+  const [isformValid, setIsFormValid] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, setValues, resetForm, errors, isValid } =
     useForm({});
 
   useEffect(() => {
     if (
-      values.name === currentUser.name &&
-      values.email === currentUser.email
+      values.name === currentUser.name ||
+      values.email === currentUser.email ||
+      !isValid
     ) {
-      setSameDataInvalid(false);
+      setIsFormValid(false);
+    } else {
+      setIsFormValid(true);
     }
-  }, [currentUser, values]);
-
-  useEffect(() => {
-    setSameDataInvalid(isValid);
-  }, [isValid, values]);
+  }, [currentUser, values, isValid]);
 
   useEffect(() => {
     setValues({ name: currentUser.name, email: currentUser.email });
@@ -61,6 +60,7 @@ const Profile = (props) => {
               className="profile__input"
               type="email"
               name="email"
+              pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
               required
               placeholder="E-mail"
             />
@@ -81,7 +81,7 @@ const Profile = (props) => {
           <button
             type="submit"
             className="profile__editbtn"
-            disabled={!sameDataInvalid}
+            disabled={!isformValid}
           >
             Редактировать
           </button>

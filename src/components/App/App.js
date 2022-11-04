@@ -42,10 +42,101 @@ function App() {
   const [isUserDataUpdateFailed, setIsUserDataUpdateFailed] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [isPopupErrorOpen, setIsPopupErrorOpen] = useState(false);
+  const [isMoviesNoFound, setIsMoviesNoFound] = useState(false);
+  const [isMoviesNoFoundSaved, setIsMoviesNoFoundSaved] = useState(false);
   const history = useHistory();
   const location = useLocation();
   const isSavedMoviesPage =
     location.pathname === '/saved-movies' ? true : false;
+
+  useEffect(() => {
+    if (isLogin) {
+      mainApi
+        .getSavedMovies()
+        .then((res) => {
+          setLikedAndSavedMovies(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [isLogin]);
+
+  useEffect(() => {
+    mainApi
+      .getUserInfo()
+      .then((res) => {
+        setIsLogin(true);
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        if (err === 'Ошибка: 401') {
+          setIsLogin(false);
+          setMovies([]);
+          setLikedAndSavedMovies([]);
+          setSavedMoviesForRender([]);
+          history.push('/');
+          localStorage.clear();
+        }
+        console.log(err);
+      });
+  }, [history]);
+
+  const loginUser = (data) => {
+    return auth
+      .login(data)
+      .then((res) => {
+        setIsLogin(true);
+        setCurrentUser(res);
+        history.push('/movies');
+      })
+      .catch((err) => {
+        setIsAuthSuccess(false);
+        console.log(err);
+      });
+  };
+
+  const registerUser = (data) => {
+    return auth
+      .register(data)
+      .then(() => {
+        loginUser({
+          email: data.email,
+          password: data.password,
+        });
+        history.push('/movies');
+      })
+      .catch((err) => {
+        setIsAuthSuccess(false);
+        console.log(err);
+      });
+  };
+
+  const updateAuthError = () => {
+    setIsAuthSuccess(true);
+  };
+
+  const handleLogout = () => {
+    mainApi
+      .logout()
+      .then(() => {
+        setIsLogin(false);
+        setMovies([]);
+        setLikedAndSavedMovies([]);
+        setSavedMoviesForRender([]);
+        history.push('/');
+        localStorage.clear();
+      })
+      .catch((err) => {
+        setIsPopupErrorOpen(true);
+        console.log(err);
+      });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const handleSearchFilms = (value) => {
     if (movies.length === 0) {
@@ -77,6 +168,11 @@ function App() {
         setMovies(filtredMovies);
         localStorage.setItem('filtred-movies', JSON.stringify(filtredMovies));
         localStorage.setItem('value', value);
+        if (filtredMovies.length === 0 || null) {
+          setIsMoviesNoFound(true);
+        } else {
+          setIsMoviesNoFound(false);
+        }
       }
     },
     [checkedShortFilmsMovies],
@@ -89,11 +185,17 @@ function App() {
       checkedShortFilmsMovies,
     );
     setSavedMoviesForRender(filtredMovies);
+    if (filtredMovies.length === 0 || null) {
+      setIsMoviesNoFoundSaved(true);
+    } else {
+      setIsMoviesNoFoundSaved(false);
+    }
   };
 
   useEffect(() => {
     if (!isSavedMoviesPage) {
       setSavedMoviesForRender(likedAndSavedMovies);
+      setIsMoviesNoFoundSaved(false);
     }
   }, [isSavedMoviesPage, likedAndSavedMovies]);
 
@@ -137,6 +239,19 @@ function App() {
     document.body.classList.toggle('body_lock');
   };
 
+  const handleUpdateUserData = (data) => {
+    mainApi
+      .updateUserInfo(data)
+      .then((res) => {
+        setCurrentUser(res);
+        setIsUserDataUpdateSuccess(true);
+      })
+      .catch((err) => {
+        setIsUserDataUpdateFailed(true);
+        console(err);
+      });
+  };
+
   const handleSavedAndDeleteMovies = (data) => {
     const isLikedAndSaved = likedAndSavedMovies.some(
       (m) => data.movieId === m.movieId,
@@ -149,7 +264,16 @@ function App() {
           setLikedAndSavedMovies([res, ...likedAndSavedMovies]);
         })
         .catch((err) => {
-          setIsPopupErrorOpen(true);
+          if (err === 'Ошибка: 401') {
+            setIsLogin(false);
+            setMovies([]);
+            setLikedAndSavedMovies([]);
+            setSavedMoviesForRender([]);
+            history.push('/');
+            localStorage.clear();
+          } else {
+            setIsPopupErrorOpen(true);
+          }
           console.log(err);
         });
     }
@@ -164,7 +288,16 @@ function App() {
           );
         })
         .catch((err) => {
-          setIsPopupErrorOpen(true);
+          if (err === 'Ошибка: 401') {
+            setIsLogin(false);
+            setMovies([]);
+            setLikedAndSavedMovies([]);
+            setSavedMoviesForRender([]);
+            history.push('/');
+            localStorage.clear();
+          } else {
+            setIsPopupErrorOpen(true);
+          }
           console.log(err);
         });
     }
@@ -182,92 +315,6 @@ function App() {
         setIsPopupErrorOpen(true);
         console.log(err);
       });
-  };
-
-  useEffect(() => {
-    if (isLogin) {
-      mainApi
-        .getSavedMovies()
-        .then((res) => {
-          setLikedAndSavedMovies(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [isLogin]);
-
-  useEffect(() => {
-    mainApi
-      .getUserInfo()
-      .then((res) => {
-        setIsLogin(true);
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const loginUser = (data) => {
-    return auth
-      .login(data)
-      .then((res) => {
-        setIsLogin(true);
-        setCurrentUser(res);
-        history.push('/movies');
-      })
-      .catch((err) => {
-        setIsAuthSuccess(false);
-        console.log(err);
-      });
-  };
-
-  const registerUser = (data) => {
-    return auth
-      .register(data)
-      .then(() => {
-        loginUser({
-          email: data.email,
-          password: data.password,
-        });
-        history.push('/movies');
-      })
-      .catch((err) => {
-        setIsAuthSuccess(false);
-        console.log(err);
-      });
-  };
-
-  const handleUpdateUserData = (data) => {
-    mainApi
-      .updateUserInfo(data)
-      .then((res) => {
-        setCurrentUser(res);
-        setIsUserDataUpdateSuccess(true);
-      })
-      .catch((err) => {
-        setIsUserDataUpdateFailed(true);
-        console(err);
-      });
-  };
-
-  const handleLogout = () => {
-    mainApi
-      .logout()
-      .then(() => {
-        setIsLogin(false);
-        setMovies([]);
-        history.push('/');
-        localStorage.clear();
-      })
-      .catch((err) => {
-        setIsPopupErrorOpen(true);
-        console.log(err);
-      });
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth',
-    });
   };
 
   const closeAllPopup = () => {
@@ -302,6 +349,7 @@ function App() {
             isLoading={isLoading}
             isNotSuccessRequest={isNotSuccessRequest}
             handleSavedAndDeleteMovies={handleSavedAndDeleteMovies}
+            isMoviesFound={isMoviesNoFound}
           />
 
           <ProtectedRoute
@@ -315,6 +363,7 @@ function App() {
             onSubmit={filterSavedMovies}
             checked={checkedShortFilmsSavedMovies}
             onCheked={handleCheckShortFilmsSavedMovies}
+            isMoviesFound={isMoviesNoFoundSaved}
           />
 
           <ProtectedRoute
@@ -329,13 +378,26 @@ function App() {
           />
 
           <Route path="/signup">
-            <Register
-              onRegister={registerUser}
-              isRegisterSuccess={isAuthSuccess}
-            />
+            {isLogin ? (
+              <Redirect to="/movies" />
+            ) : (
+              <Register
+                onRegister={registerUser}
+                isRegisterSuccess={isAuthSuccess}
+                updateAuthError={updateAuthError}
+              />
+            )}
           </Route>
           <Route path="/signin">
-            <Login onLogin={loginUser} isLoginSuccess={isAuthSuccess} />
+            {isLogin ? (
+              <Redirect to="/movies" />
+            ) : (
+              <Login
+                onLogin={loginUser}
+                isLoginSuccess={isAuthSuccess}
+                updateAuthError={updateAuthError}
+              />
+            )}
           </Route>
           <Route path="*">
             <NotFound />

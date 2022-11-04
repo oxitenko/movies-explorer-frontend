@@ -3,18 +3,21 @@ import searchicon from '../../image/search-icon.svg';
 import placeHolderIcon from '../../image/search-icon-placeholder.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useForm from '../../hooks/useForm';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const SearchForm = (props) => {
+  const [isEmptySearchInput, setEmptySearchInput] = useState(false);
   const { values, handleChange, setValues, resetForm } = useForm({});
   const storageValue = localStorage.getItem('value');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!values.film) {
+      setEmptySearchInput(true);
       return;
     }
     props.onSubmit(values.film);
+    setEmptySearchInput(false);
     resetForm();
   };
 
@@ -27,7 +30,7 @@ const SearchForm = (props) => {
   return (
     <section className="search">
       <div className="search__container">
-        <form className="search__form" onSubmit={handleSubmit}>
+        <form className="search__form" onSubmit={handleSubmit} noValidate>
           <img
             className="search__icon"
             src={placeHolderIcon}
@@ -47,6 +50,11 @@ const SearchForm = (props) => {
           </button>
         </form>
         <FilterCheckbox checked={props.checked} onCheked={props.onCheked} />
+        {isEmptySearchInput ? (
+          <span className="search__error">Нужно ввести ключевое слово</span>
+        ) : (
+          ''
+        )}
       </div>
     </section>
   );

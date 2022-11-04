@@ -3,20 +3,32 @@ import '../../style/AuthForm.css';
 import pageLogo from '../../image/logo.svg';
 import { Link } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
+import { useEffect } from 'react';
 
 const Register = (props) => {
   const { values, handleChange, errors, isValid, resetForm } = useForm({});
 
+  useEffect(() => {
+    props.updateAuthError();
+  }, []);
+
+  useEffect(() => {
+    if (props.isRegisterSuccess) {
+      resetForm();
+    }
+  }, [props.isRegisterSuccess, resetForm]);
+
   const submitRegisterform = (e) => {
     e.preventDefault();
     props.onRegister(values);
-    resetForm();
   };
 
   return (
     <section className="auth auth__signup">
       <div className="auth__content">
-        <img className="auth__logo" src={pageLogo} alt="logo" />
+        <Link to="/">
+          <img className="auth__logo" src={pageLogo} alt="logo" />
+        </Link>
         <h2 className="auth__title">Добро пожаловать!</h2>
         <form
           className="auth__form auth__form-signup"
@@ -50,6 +62,7 @@ const Register = (props) => {
               value={values.email || ''}
               onChange={handleChange}
               autoComplete="username"
+              pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
               required
               placeholder="E-mail"
             />
@@ -77,7 +90,7 @@ const Register = (props) => {
           </label>
           {!props.isRegisterSuccess ? (
             <span className="auth__error">
-              Произошла ошибка, попробуйту снова
+              Произошла ошибка, попробуйте снова
             </span>
           ) : (
             ''

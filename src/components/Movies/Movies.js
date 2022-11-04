@@ -20,6 +20,7 @@ const Movies = (props) => {
           isNotSuccessRequest={props.isNotSuccessRequest}
           handleSavedAndDeleteMovies={props.handleSavedAndDeleteMovies}
           savedMovies={props.savedMovies}
+          isMoviesFound={props.isMoviesFound}
         />
       )}
     </section>
