@@ -2,11 +2,11 @@ import './PopupError.css';
 import close from '../../image/humbcross.svg';
 import error from '../../image/popup-err.svg';
 
-const PopupError = () => {
+const PopupError = (props) => {
   return (
-    <div className="popup">
+    <div className={`popup ${props.isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__content">
-        <button className="popup__closebtn">
+        <button className="popup__closebtn" onClick={props.onClose}>
           <img src={close} alt="close button" />
         </button>
         <img className="popup__errpic" src={error} alt="error pic" />

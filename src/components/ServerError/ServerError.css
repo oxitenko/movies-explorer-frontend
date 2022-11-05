@@ -1,0 +1,18 @@
+.error__server {
+  font-family: 'Inter';
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 400;
+  line-height: 28px;
+  margin-top: 5%;
+  max-width: 500px;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .error__server {
+    font-size: 16px;
+    line-height: 18px;
+    margin-top: 15%;
+  }
+}

@@ -2,18 +2,22 @@ import './MobileHeader.css';
 import { useLocation } from 'react-router-dom';
 import humbmenu from '../../image/humbmenu.svg';
 import humbcross from '../../image/humbcross.svg';
-import MobileLinksList from '../MobileLinksList/MobileLinksList';
+import MobileLinksListAuth from '../MobileLinksListAuth/MobileLinksListAuth';
+import MobileLinkListNoAuth from '../MobileLinkListNoAuth/MobileLinkListNoAuth';
 
 const MobileHeader = (props) => {
   let location = useLocation();
 
   return (
     <>
-      {(location.pathname === '/movies' || '/saved-movies' || '/profile') && (
+      {
         <nav className="mobilenav">
-          {props.open && (
-            <MobileLinksList open={props.open} close={props.openClose} />
-          )}
+          {props.open &&
+            (props.isLogin ? (
+              <MobileLinksListAuth open={props.open} close={props.openClose} />
+            ) : (
+              <MobileLinkListNoAuth open={props.open} close={props.openClose} />
+            ))}
 
           {(location.pathname === '/movies' ||
             '/saved-movies' ||
@@ -37,7 +41,7 @@ const MobileHeader = (props) => {
             </>
           )}
         </nav>
-      )}
+      }
     </>
   );
 };

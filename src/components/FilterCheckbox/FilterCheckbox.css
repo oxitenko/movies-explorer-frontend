@@ -65,8 +65,10 @@
 @media screen and (max-width: 767px) {
   .filter {
     border-left: none;
+    position: absolute;
     margin: 0;
     padding: 0;
+    transform: translateY(80px);
     justify-content: center;
   }
   .filter__text {

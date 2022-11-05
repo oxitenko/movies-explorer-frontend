@@ -1,18 +1,28 @@
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { movies } from '../../utils/appData';
-import { MoviesButton, PaginationButtonVisible } from '../Buttons/Buttons';
+import Preloader from '../Preloader/Preloader';
 
-const Movies = () => {
+const Movies = (props) => {
   return (
     <section className="movies">
-      <SearchForm />
-      <MoviesCardList
-        pagination={PaginationButtonVisible}
-        button={MoviesButton}
-        movies={movies}
+      <SearchForm
+        movies={props.movies}
+        onSubmit={props.onSubmit}
+        checked={props.checked}
+        onCheked={props.onCheked}
       />
+      {props.isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          movies={props.movies}
+          isNotSuccessRequest={props.isNotSuccessRequest}
+          handleSavedAndDeleteMovies={props.handleSavedAndDeleteMovies}
+          savedMovies={props.savedMovies}
+          isMoviesFound={props.isMoviesFound}
+        />
+      )}
     </section>
   );
 };

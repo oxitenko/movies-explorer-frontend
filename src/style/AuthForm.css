@@ -9,6 +9,7 @@
   width: 396px;
   justify-content: center;
   margin: 0 auto;
+  margin-top: 70px;
 }
 
 .auth__logo {
@@ -96,6 +97,14 @@
   height: 45px;
   border: none;
   cursor: pointer;
+}
+
+.auth__button:disabled {
+  background: #b1cdfa;
+}
+
+.auth__button:disabled:hover {
+  background: #b1cdfa;
 }
 
 .auth__button:hover {
