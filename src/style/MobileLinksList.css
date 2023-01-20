@@ -12,6 +12,7 @@
     justify-content: flex-start;
     gap: 28px;
     transition: all 0.3s ease-in-out;
+    z-index: 2;
   }
   .mobilenav__menu-active {
     transform: translateX(-94%);
@@ -27,14 +28,17 @@
     font-size: 18px;
     line-height: 22px;
   }
-  .mobilenav__menu-link:first-child {
+  .mobilenav__menulink:first-child {
     margin-top: 159px;
   }
-  .mobilenav__menu-link:last-child {
+  .mobilenav__menulink:last-child {
     margin-top: 88%;
   }
   .header__link-active {
     border-bottom: 2px solid #ffffff;
+  }
+  .mobilenav__menulink-noauth:last-child {
+    margin-top: 20px;
   }
 }
 
@@ -43,13 +47,16 @@
     width: 100vw;
     gap: 24px;
   }
-  .mobilenav__menu-link:first-child {
+  .mobilenav__menulink:first-child {
     margin-top: 144px;
   }
-  .mobilenav__menu-link:last-child {
+  .mobilenav__menulink:last-child {
     margin-top: 90%;
   }
   .header__link-account-humb {
     bottom: 46px;
+  }
+  .mobilenav__menulink-noauth:last-child {
+    margin-top: 20px;
   }
 }

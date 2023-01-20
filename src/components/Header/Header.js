@@ -31,7 +31,7 @@ const Header = (props) => {
             : 'header__novigation-movies'
         }
       >
-        {location.pathname === '/' ? <MainLinksList /> : <MoviesLinksList />}
+        {!props.isLogin ? <MainLinksList /> : <MoviesLinksList />}
       </nav>
       {props.children}
     </header>

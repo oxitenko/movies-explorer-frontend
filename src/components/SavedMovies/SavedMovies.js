@@ -1,20 +1,22 @@
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import { savedMovies } from '../../utils/appData';
-import {
-  SavedMoviesButton,
-  PaginationButtonInvisible,
-} from '../Buttons/Buttons';
 
-const SavedMovies = () => {
+const SavedMovies = (props) => {
   return (
     <section className="saved-movies">
-      <SearchForm />
+      <SearchForm
+        isSavedMoviesPage={props.isSavedMoviesPage}
+        onSubmit={props.onSubmit}
+        checked={props.checked}
+        onCheked={props.onCheked}
+      />
       <MoviesCardList
-        pagination={PaginationButtonInvisible}
-        button={SavedMoviesButton}
-        movies={savedMovies}
+        movies={props.savedMovies}
+        savedMovies={props.savedMovies}
+        isSavedMoviesPage={props.isSavedMoviesPage}
+        deleteSavedMovie={props.deleteSavedMovie}
+        isMoviesFound={props.isMoviesFound}
       />
     </section>
   );

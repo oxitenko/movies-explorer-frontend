@@ -1,8 +1,8 @@
-import './MobileLinksList.css';
+import '../../style/MobileLinksList.css';
 import accicon from '../../image/accicon.svg';
 import { NavLink, Link } from 'react-router-dom';
 
-const MobileLinksList = (props) => {
+const MobileLinksListAuth = (props) => {
   return (
     <ul
       className={
@@ -11,7 +11,7 @@ const MobileLinksList = (props) => {
           : 'mobilenav__menu mobilenav__menu-active'
       }
     >
-      <li onClick={props.close} className="mobilenav__menu-link">
+      <li onClick={props.close} className="mobilenav__menulink">
         <NavLink
           activeClassName="header__link-active"
           className="header__link header__link-humb"
@@ -21,7 +21,7 @@ const MobileLinksList = (props) => {
           Главная
         </NavLink>
       </li>
-      <li onClick={props.close} className="mobilenav__menu-link">
+      <li onClick={props.close} className="mobilenav__menulink">
         <NavLink
           activeClassName="header__link-active"
           className="header__link header__link-humb"
@@ -30,7 +30,7 @@ const MobileLinksList = (props) => {
           Фильмы
         </NavLink>
       </li>
-      <li onClick={props.close} className="mobilenav__menu-link">
+      <li onClick={props.close} className="mobilenav__menulink">
         <NavLink
           activeClassName="header__link-active"
           className="header__link header__link-humb"
@@ -39,7 +39,7 @@ const MobileLinksList = (props) => {
           Сохранённые фильмы
         </NavLink>
       </li>
-      <li onClick={props.close} className="mobilenav__menu-link">
+      <li onClick={props.close} className="mobilenav__menulink">
         <Link
           className="header__link header__link-account header__link-account-humb"
           to="/profile"
@@ -56,4 +56,4 @@ const MobileLinksList = (props) => {
   );
 };
 
-export default MobileLinksList;
+export default MobileLinksListAuth;

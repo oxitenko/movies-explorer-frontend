@@ -1,31 +1,43 @@
 import './MoviesLinksList.css';
 import accicon from '../../image/accicon.svg';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const MoviesLinksList = () => {
   return (
     <ul className="header__container-movies">
       <li>
-        <Link className="header__link header__link-movies" to="/movies">
+        <NavLink
+          className="header__link header__link-movies"
+          activeClassName="header__link_active"
+          to="/movies"
+        >
           Фильмы
-        </Link>
+        </NavLink>
       </li>
 
       <li>
-        <Link className="header__link header__link-movies" to="/saved-movies">
+        <NavLink
+          className="header__link header__link-movies"
+          activeClassName="header__link_active"
+          to="/saved-movies"
+        >
           Сохранённые фильмы
-        </Link>
+        </NavLink>
       </li>
 
       <li>
-        <Link className="header__link header__link-account" to="/profile">
+        <NavLink
+          className="header__link header__link-account"
+          activeClassName="header__link_active"
+          to="/profile"
+        >
           <img
             className="header__link-icon"
             src={accicon}
             alt="Иконка ссылки на страницу аккаунта"
           />
           Аккаунт
-        </Link>
+        </NavLink>
       </li>
     </ul>
   );
